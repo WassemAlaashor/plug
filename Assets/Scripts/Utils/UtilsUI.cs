@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace RedRunner.UI
+namespace PlugBoy.UI
 {
     public static class UtilsUI
     {
