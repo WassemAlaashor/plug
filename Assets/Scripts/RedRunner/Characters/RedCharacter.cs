@@ -309,6 +309,7 @@ namespace RedRunner.Characters
                 m_CurrentRunSpeed /= m_SprintMultiplier;
                 print("SHIFT UP");
             }
+            print(m_CurrentRunSpeed);
 
             // Input Processing
             Move(Input.GetAxis("Horizontal"));
