@@ -5,48 +5,54 @@ public class Outlet : MonoBehaviour
 {
 
     [SerializeField]
-    private GameObject outletTrigger;
-    private bool forceActive = false;
-    private PointEffector2D pointEffector;
-    private CircleCollider2D connectTrigger;
-    private CircleCollider2D forceCollidder;
+    protected GameObject m_OutletTrigger;
+    protected bool m_ForceActive = false;
+    protected bool m_PlugConnected = false;
+    protected PointEffector2D m_PointEffector;
+    protected CircleCollider2D m_ConnectTrigger;
+    protected CircleCollider2D m_ForceCollider;
+
+    public virtual bool ForceActive {
+        get {
+            return m_ForceActive;
+        }
+        set {
+            m_ForceActive = value;
+        }
+    }
+
+    public virtual bool PlugConnected {
+        get {
+            return m_PlugConnected;
+        }
+        set {
+            m_PlugConnected = value;
+        }
+    }
 
     void Start()
     {
-        pointEffector = GetComponent<PointEffector2D>();
-        connectTrigger = outletTrigger.GetComponent<CircleCollider2D>();
-        // Finding force collider (outer collider)
+        m_PointEffector = GetComponent<PointEffector2D>();
+        m_ConnectTrigger = m_OutletTrigger.GetComponent<CircleCollider2D>();
+        // Finding force collider (which is the outer collider)
+        // FIXME
         foreach (CircleCollider2D collider in GetComponents<CircleCollider2D>())
         {
             if (collider.usedByEffector)
             {
-                forceCollidder = collider;
+                m_ForceCollider = collider;
             }
         }
-        forceCollidder.enabled = forceActive;
-        pointEffector.enabled = forceActive;
-        connectTrigger.enabled = forceActive;
+        m_ForceCollider.enabled = m_ForceActive;
+        m_PointEffector.enabled = m_ForceActive;
+        m_ConnectTrigger.enabled = m_ForceActive;
     }
 
     void Update()
     {
-        forceCollidder.enabled = forceActive;
-        pointEffector.enabled = forceActive;
-        connectTrigger.enabled = forceActive;
-        // GetComponent<SpriteRenderer>().enabled = forceActive;
-    }
-
-    public void Enable()
-    {
-        // Point effector, force collider and trigger collider
-        forceActive = true;
-        print("Outlet Enabled");
-    }
-
-
-    public void Disable()
-    {
-        forceActive = false;
+        m_ForceCollider.enabled = m_ForceActive;
+        m_PointEffector.enabled = m_ForceActive;
+        m_ConnectTrigger.enabled = m_ForceActive;
     }
 
 }

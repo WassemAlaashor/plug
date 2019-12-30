@@ -162,8 +162,12 @@ namespace PlugBoy.Collectables
 		public virtual void OnChestOpened ()
 		{
 			// AudioManager.Singleton.PlayChestSound (transform.position);
-			m_ParticleSystem.Play ();
 			int coinsCount = Random.Range (m_MinimumCoins, m_MaximumCoins);
+			if (coinsCount == m_MaximumCoins)
+			{
+				// Got maximum amount of coins
+				m_ParticleSystem.Play (); // Yay
+			}
 			for (int i = 0; i < coinsCount; i++) {
 				CoinRigidbody2D coin = Instantiate<CoinRigidbody2D> (m_CoinRigidbody2D, m_SpawnPoint.position, Quaternion.identity, transform);
 				float x = Random.Range (m_RandomForceXMinimum, m_RandomForceXMaximum);

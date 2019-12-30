@@ -1027,7 +1027,7 @@ ParticleSystem:
           m_RotationOrder: 4
       cycleCount: 1
       repeatInterval: 0.01
-      probability: 0
+      probability: 1
   SizeModule:
     enabled: 1
     curve:
@@ -4703,8 +4703,8 @@ ParticleSystemRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1687951149
-  m_SortingLayer: 0
+  m_SortingLayerID: -1826534923
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_RenderMode: 0
   m_SortMode: 0

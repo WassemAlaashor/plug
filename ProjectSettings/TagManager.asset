@@ -17,7 +17,7 @@ TagManager:
   - 
   - 
   - Ground
-  - 
+  - Characters
   - 
   - 
   - 
@@ -41,6 +41,36 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 275033547
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Environment
+    uniqueID: 2030772491
+    locked: 0
+  - name: Chest
+    uniqueID: 2945945391
+    locked: 0
+  - name: Star Particles
+    uniqueID: 2468432373
+    locked: 0
+  - name: Enemies
+    uniqueID: 47128623
+    locked: 0
+  - name: Characters
+    uniqueID: 1615223533
+    locked: 0
+  - name: Water
+    uniqueID: 2154346301
+    locked: 0
+  - name: Coin
+    uniqueID: 1469644899
+    locked: 0
+  - name: Particles
+    uniqueID: 2062020019
+    locked: 0
+  - name: Weather
+    uniqueID: 30660073
     locked: 0

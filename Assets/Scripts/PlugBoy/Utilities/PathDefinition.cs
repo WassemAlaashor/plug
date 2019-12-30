@@ -50,38 +50,9 @@ namespace PlugBoy.Utilities
 			}
 		}
 
-		#if UNITY_EDITOR
-		void OnEnable ()
-		{
-			if ( m_Points == null )
-			{
-				m_Points = new List<PathPoint> ();
-			}
-		}
-		#endif
-
-		#if UNITY_EDITOR
-		void Update ()
-		{
-			if ( transform.childCount != m_Points.Count )
-			{
-				m_Points.Clear ();
-				for ( int i = 0; i < transform.childCount; i++ )
-				{
-					Transform child = transform.GetChild ( i );
-					PathPoint point = child.GetComponent<PathPoint> ();
-					if ( point != null )
-					{
-						m_Points.Add ( point );
-					}
-				}
-			}
-		}
-		#endif
-
 		public IEnumerator<PathPoint> GetPathEnumerator ()
 		{
-			// Exit when points count is smaller one
+			// Exit when points count is smaller than one
 			if ( m_Points == null || m_Points.Count < 1 )
 				yield break;
 

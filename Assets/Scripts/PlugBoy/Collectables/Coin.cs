@@ -59,7 +59,6 @@ namespace PlugBoy.Collectables
 		public override void OnCollisionEnter2D (Collision2D collision2D)
 		{
 			string tag = collision2D.gameObject.tag;
-			print(tag);
 			if (!m_UseOnTriggerEnter2D && tag == "Player") {
 				Collect ();
 			}

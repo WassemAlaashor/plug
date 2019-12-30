@@ -67,9 +67,8 @@ namespace PlugBoy.Characters
         #region Private Variables
 
         protected bool m_ClosingEye = false;
-        // protected bool m_Guard = false;
-        // protected bool m_Block = false;
         protected Vector2 m_Speed = Vector2.zero;
+        protected bool m_Moving = false;
         protected float m_CurrentRunSpeed = 0f;
         protected float m_SprintMultiplier = 2f;
         protected float m_CurrentSmoothVelocity = 0f;
@@ -233,22 +232,6 @@ namespace PlugBoy.Characters
             }
         }
 
-        // public override bool Guard
-        // {
-        // 	get
-        // 	{
-        // 		return m_Guard;
-        // 	}
-        // }
-
-        // public override bool Block
-        // {
-        // 	get
-        // 	{
-        // 		return m_Block;
-        // 	}
-        // }
-
         public override AudioSource Audio
         {
             get
@@ -270,8 +253,6 @@ namespace PlugBoy.Characters
             m_Plug.OnPlugConnected += Plug_OnPlugConnected;
             IsDead = new Property<bool>(false);
             m_ClosingEye = false;
-            // m_Guard = false;
-            // m_Block = false;
             m_CurrentFootstepSoundIndex = 0;
             GameManager.OnReset += GameManager_OnReset;
         }
@@ -310,7 +291,6 @@ namespace PlugBoy.Characters
                 print("SHIFT UP");
             }
 
-            // Input Processing
             Move(Input.GetAxis("Horizontal"));
             if (Input.GetButtonDown("Jump"))
             {
@@ -320,39 +300,6 @@ namespace PlugBoy.Characters
             {
                 StartCoroutine(CloseEye());
             }
-            // if ( CrossPlatformInputManager.GetButtonDown ( "Guard" ) )
-            // {
-            // 	m_Guard = !m_Guard;
-            // }
-            // if ( m_Guard )
-            // {
-            // 	if ( CrossPlatformInputManager.GetButtonDown ( "Fire" ) )
-            // 	{
-            // 		m_Animator.SetTrigger ( m_Actions [ m_CurrentActionIndex ] );
-            // 		if ( m_CurrentActionIndex < m_Actions.Length - 1 )
-            // 		{
-            // 			m_CurrentActionIndex++;
-            // 		}
-            // 		else
-            // 		{
-            // 			m_CurrentActionIndex = 0;
-            // 		}
-            // 	}
-            // }
-
-            // if ( Input.GetButtonDown ( "Roll" ) )
-            // {
-            // 	Vector2 force = new Vector2 ( 0f, 0f );
-            // 	if ( transform.localScale.z > 0f )
-            // 	{
-            // 		force.x = m_RollForce;
-            // 	}
-            // 	else if ( transform.localScale.z < 0f )
-            // 	{
-            // 		force.x = -m_RollForce;
-            // 	}
-            // 	m_Rigidbody2D.AddForce ( force );
-            // }
         }
 
         void LateUpdate()
@@ -362,12 +309,6 @@ namespace PlugBoy.Characters
             m_Animator.SetFloat("VelocityY", m_Rigidbody2D.velocity.y);
             m_Animator.SetBool("IsGrounded", m_GroundCheck.IsGrounded);
             m_Animator.SetBool("IsDead", IsDead.Value);
-            // m_Animator.SetBool ( "Block", m_Block );
-            // m_Animator.SetBool ( "Guard", m_Guard );
-            // if ( Input.GetButtonDown ( "Roll" ) )
-            // {
-            // 	m_Animator.SetTrigger ( "Roll" );
-            // }
         }
 
         void OnTriggerEnter2D(Collider2D collidedObj)
@@ -378,7 +319,7 @@ namespace PlugBoy.Characters
                 print("CHARACTER: Entered outlet collider");
                 // Activate the outlet
                 Outlet outlet = collidedObj.gameObject.GetComponent<Outlet>();
-                outlet.Enable();
+                outlet.ForceActive = true;
                 // Activate the plug
                 // m_Plug.OnReadyToConnect();
             }
@@ -391,7 +332,7 @@ namespace PlugBoy.Characters
             {
                 print("CHARACTER: Exited force collider");
                 Outlet outlet = collidedObj.gameObject.GetComponent<Outlet>();
-                outlet.Disable();
+                outlet.ForceActive = false;
                 m_Plug.DisconnectFromOutlet();
                 m_Plug.AttachToPlayer();
             }
@@ -444,6 +385,7 @@ namespace PlugBoy.Characters
                 Vector2 velocity = m_Rigidbody2D.velocity;
                 velocity.x = speed * horizontalAxis;
                 m_Rigidbody2D.velocity = velocity;
+
                 if (horizontalAxis > 0f)
                 {
                     Vector3 scale = transform.localScale;
@@ -455,6 +397,19 @@ namespace PlugBoy.Characters
                     Vector3 scale = transform.localScale;
                     scale.x = Mathf.Sign(horizontalAxis);
                     transform.localScale = scale;
+                }
+
+                if (m_Plug.Connected)
+                {
+                    // Move input check for RunParticle edge case
+                    if (horizontalAxis != 0)
+                    {
+                        m_Moving = true;
+                    }
+                    else
+                    {
+                        m_Moving = false;
+                    }
                 }
             }
         }
@@ -503,7 +458,16 @@ namespace PlugBoy.Characters
         {
             if (!IsDead.Value)
             {
-                m_RunParticleSystem.Emit(1);
+                // Physics of the joint between plug and character can trigger
+                // To avoid that, we're checking if we have movement input when the joint is active
+                if (m_Plug.Connected && !m_Moving)
+                {
+                    return;
+                }
+                else
+                {
+                    m_RunParticleSystem.Emit(1);
+                }
             }
         }
 
@@ -511,10 +475,10 @@ namespace PlugBoy.Characters
         {
             IsDead.Value = false;
             m_ClosingEye = false;
-            // m_Guard = false;
-            // m_Block = false;
             m_CurrentFootstepSoundIndex = 0;
+            transform.position = m_InitialPosition;
             transform.localScale = m_InitialScale;
+            m_Plug.transform.position = m_InitialPosition; // TODO: Custom respawn for plug
             m_Rigidbody2D.velocity = Vector2.zero;
             m_Skeleton.SetActive(false, m_Rigidbody2D.velocity);
         }
@@ -525,7 +489,6 @@ namespace PlugBoy.Characters
 
         void GameManager_OnReset()
         {
-            transform.position = m_InitialPosition;
             Reset();
         }
 
