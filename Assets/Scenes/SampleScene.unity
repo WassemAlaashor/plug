@@ -127,7 +127,7 @@ GameObject:
   - component: {fileID: 54390120}
   - component: {fileID: 54390121}
   - component: {fileID: 54390122}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Plug
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -294,8 +294,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8af1599354e67e64cb89285f86627b5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cable: {fileID: 1791405713871353}
-  PlugEndPoint: {fileID: 1412950286}
+  m_PlugEndPoint: {fileID: 1412950286}
 --- !u!255 &54390122
 FixedJoint2D:
   m_ObjectHideFlags: 0
@@ -541,7 +540,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2b36de9942fd8643bc1c75fd1537b3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outletTrigger: {fileID: 195425939}
+  m_OutletTrigger: {fileID: 195425939}
 --- !u!250 &328024339
 PointEffector2D:
   m_ObjectHideFlags: 0
@@ -2142,7 +2141,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_PathDefinition: {fileID: 428081279}
-  switchObject: {fileID: 328024335}
+  m_SwitchOutlet: {fileID: 328024338}
   m_Step: 0.1
   m_FollowSpeeds: 1
   m_Speed: 1
@@ -2386,7 +2385,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1595013175880470}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.93, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4808875541346038}
@@ -18279,7 +18278,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2b36de9942fd8643bc1c75fd1537b3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outletTrigger: {fileID: 4947876674532695104}
+  m_OutletTrigger: {fileID: 4947876674532695104}
 --- !u!58 &4947876674128505794
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -18546,7 +18545,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2b36de9942fd8643bc1c75fd1537b3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outletTrigger: {fileID: 4947876674866763321}
+  m_OutletTrigger: {fileID: 4947876674866763321}
 --- !u!250 &4947876675002524089
 PointEffector2D:
   m_ObjectHideFlags: 0
