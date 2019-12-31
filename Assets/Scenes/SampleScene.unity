@@ -836,7 +836,7 @@ MonoBehaviour:
   m_MinY: -3
   m_MinX: -11
   m_ShakeControl: {fileID: 0}
-  m_FastMoveSpeed: 12
+  m_FastMoveSpeed: 1.2
   m_Speed: 1
 --- !u!20 &519420031
 Camera:

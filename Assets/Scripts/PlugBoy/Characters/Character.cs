@@ -54,6 +54,8 @@ namespace PlugBoy.Characters
 
 		public abstract Skeleton Skeleton { get; }
 
+		public virtual Property<int> CurrentHP { get; set; }
+
 		public virtual Property<bool> IsDead { get; set; }
 
 		public abstract bool ClosingEye { get; }

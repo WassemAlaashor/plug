@@ -34,11 +34,6 @@ namespace PlugBoy
 
         [SerializeField]
         private Character m_MainCharacter;
-        [SerializeField]
-        [TextArea(3, 30)]
-        private string m_ShareText;
-        [SerializeField]
-        private string m_ShareUrl;
         private float m_StartScoreX = 0f;
         private float m_HighScore = 0f;
         private float m_LastScore = 0f;
@@ -248,26 +243,6 @@ namespace PlugBoy
             {
                 OnReset();
             }
-        }
-
-        public void ShareOnTwitter()
-        {
-            Share("https://twitter.com/intent/tweet?text={0}&url={1}");
-        }
-
-        public void ShareOnGooglePlus()
-        {
-            Share("https://plus.google.com/share?text={0}&href={1}");
-        }
-
-        public void ShareOnFacebook()
-        {
-            Share("https://www.facebook.com/sharer/sharer.php?u={1}");
-        }
-
-        public void Share(string url)
-        {
-            Application.OpenURL(string.Format(url, m_ShareText, m_ShareUrl));
         }
 
         [System.Serializable]

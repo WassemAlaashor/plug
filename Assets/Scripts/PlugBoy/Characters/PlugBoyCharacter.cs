@@ -66,7 +66,6 @@ namespace PlugBoy.Characters
 
         #region Private Variables
 
-        protected int m_CurrentHP = 1000;
         protected bool m_ClosingEye = false;
         protected Vector2 m_Speed = Vector2.zero;
         protected bool m_Moving = false;
@@ -253,6 +252,7 @@ namespace PlugBoy.Characters
             m_Skeleton.OnActiveChanged += Skeleton_OnActiveChanged;
             m_Plug.OnPlugConnected += Plug_OnPlugConnected;
             IsDead = new Property<bool>(false);
+            CurrentHP = new Property<int>(1000);
             m_ClosingEye = false;
             m_CurrentFootstepSoundIndex = 0;
             GameManager.OnReset += GameManager_OnReset;
@@ -265,7 +265,7 @@ namespace PlugBoy.Characters
                 return;
             }
 
-            if (transform.position.y < -2f || m_CurrentHP < 1)
+            if (transform.position.y < -2f || CurrentHP.Value < 1)
             {
                 Die();
             }
@@ -451,7 +451,7 @@ namespace PlugBoy.Characters
                                                   Quaternion.identity);
                     Destroy(particle.gameObject, particle.main.duration);
                 }
-                // CameraController.Singleton.fastMove = true;
+                CameraController.Singleton.fastMove = true;
             }
         }
 
@@ -475,7 +475,7 @@ namespace PlugBoy.Characters
         public override void Reset()
         {
             IsDead.Value = false;
-            m_CurrentHP = 1000;
+            CurrentHP.Value = 1000;
             m_ClosingEye = false;
             m_CurrentFootstepSoundIndex = 0;
             transform.position = m_InitialPosition;
