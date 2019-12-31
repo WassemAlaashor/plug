@@ -2278,9 +2278,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_StartPoint: {fileID: 4538133405959455}
   m_EndPoint: {fileID: 1412950286}
-  m_CableSegmentLength: 0.1
+  m_CableSegmentLength: 0.2
   m_CableSegmentCount: 20
-  m_LineWidth: 0.2
+  m_LineWidth: 0.4
 --- !u!1 &1805241563475705
 GameObject:
   m_ObjectHideFlags: 0
