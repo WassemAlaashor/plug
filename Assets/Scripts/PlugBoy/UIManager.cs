@@ -70,6 +70,8 @@ namespace PlugBoy
 
         public void Init()
         {
+            // var loadingScreen = GetUIScreen(UIScreenInfo.LOADING_SCREEN);
+            // OpenScreen(loadingScreen);
             var loadingScreen = GetUIScreen(UIScreenInfo.LOADING_SCREEN);
             OpenScreen(loadingScreen);
         }

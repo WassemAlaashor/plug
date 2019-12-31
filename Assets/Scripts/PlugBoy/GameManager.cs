@@ -90,7 +90,6 @@ namespace PlugBoy
             SetAudioEnabled(true);
             m_LastScore = 0f;
             m_HighScore = 0f;
- 
         }
 
         void UpdateDeathEvent(bool isDead)
@@ -135,7 +134,7 @@ namespace PlugBoy
         public void Init()
         {
             EndGame();
-            // UIManager.Singleton.Init();
+            UIManager.Singleton.Init();
             // StartCoroutine(Load());
         }
 
@@ -225,15 +224,7 @@ namespace PlugBoy
 
         public void RespawnCharacter(Character character)
         {
-            Block block = TerrainGenerator.Singleton.GetCharacterBlock();
-            if (block != null)
-            {
-                Vector3 position = block.transform.position;
-                position.y += 2.56f;
-                position.x += 1.28f;
-                character.transform.position = position;
-                character.Reset();
-            }
+            character.Reset();
         }
 
         public void Reset()
