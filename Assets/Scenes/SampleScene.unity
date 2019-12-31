@@ -2276,11 +2276,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66a12a29b27d1be4aa0b4e175de9536f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartPoint: {fileID: 4538133405959455}
-  EndPoint: {fileID: 1412950286}
-  cableSegLen: 0.2
-  segmentLength: 20
-  lineWidth: 0.31
+  m_StartPoint: {fileID: 4538133405959455}
+  m_EndPoint: {fileID: 1412950286}
+  m_CableSegmentLength: 0.1
+  m_CableSegmentCount: 20
+  m_LineWidth: 0.2
 --- !u!1 &1805241563475705
 GameObject:
   m_ObjectHideFlags: 0
