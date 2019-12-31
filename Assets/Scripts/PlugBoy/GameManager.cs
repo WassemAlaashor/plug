@@ -4,9 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-// using BayatGames.SaveGameFree;
-// using BayatGames.SaveGameFree.Serializers;
-
 using PlugBoy.Characters;
 using PlugBoy.Collectables;
 using PlugBoy.TerrainGeneration;
