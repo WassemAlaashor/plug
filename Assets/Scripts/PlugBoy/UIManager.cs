@@ -70,8 +70,6 @@ namespace PlugBoy
 
         public void Init()
         {
-            // var loadingScreen = GetUIScreen(UIScreenInfo.LOADING_SCREEN);
-            // OpenScreen(loadingScreen);
             var loadingScreen = GetUIScreen(UIScreenInfo.LOADING_SCREEN);
             OpenScreen(loadingScreen);
         }
@@ -80,11 +78,10 @@ namespace PlugBoy
         {
             if (Input.GetButtonDown("Cancel"))
             {
-                //Added enumeration to store screen info, aka type, so it will be easier to understand it
                 var pauseScreen = GetUIScreen(UIScreenInfo.PAUSE_SCREEN);
                 var ingameScreen = GetUIScreen(UIScreenInfo.IN_GAME_SCREEN);
 
-                //If the pause screen is not open : open it otherwise close it
+                // If the pause screen is not open, open it otherwise close it
                 if (!pauseScreen.IsOpen)
                 {
                     if(m_ActiveScreen == ingameScreen)
@@ -102,7 +99,7 @@ namespace PlugBoy
                     {
                         CloseScreen(pauseScreen);
                         OpenScreen(ingameScreen);
-                        ////We are sure that we want to resume the game when we close a screen
+                        // We are sure that we want to resume the game when we close a screen
                         GameManager.Singleton.ResumeGame();
                     }
                 }

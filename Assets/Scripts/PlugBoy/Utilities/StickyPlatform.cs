@@ -6,21 +6,26 @@ namespace PlugBoy.Utilities
 {
     public class StickyPlatform : MonoBehaviour
     {
-        [SerializeField]
-        private Transform PlayerRoot;
+        private GameObject m_PlayerRoot;
+
+        void Start()
+        {
+            // Player object is always in root
+            m_PlayerRoot = GameObject.Find("/Player");
+        }
         void OnTriggerStay2D(Collider2D col)
         {
             if (col.gameObject.tag == "Player")
             {
                 print("Player stick.");
-                PlayerRoot.SetParent(transform);
+                m_PlayerRoot.transform.SetParent(transform);
             }
         }
         void OnTriggerExit2D(Collider2D col)
         {
             if (col.gameObject.tag == "Player")
             {
-                PlayerRoot.SetParent(null);
+                m_PlayerRoot.transform.SetParent(null);
             }
         }
     }
