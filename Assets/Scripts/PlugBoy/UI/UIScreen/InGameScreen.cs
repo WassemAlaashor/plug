@@ -16,7 +16,7 @@ namespace PlugBoy.UI
             {
                 var pauseScreen = UIManager.Singleton.UISCREENS.Find(el => el.ScreenInfo == UIScreenInfo.PAUSE_SCREEN);
                 UIManager.Singleton.OpenScreen(pauseScreen);
-                GameManager.Singleton.StopGame();
+                GameManager.Singleton.PauseGame();
             });
         }
 

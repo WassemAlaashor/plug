@@ -12,25 +12,7 @@ namespace PlugBoy
 {
     public sealed class GameManager : MonoBehaviour
     {
-        public delegate void AudioEnabledHandler(bool active);
-
-        public delegate void ScoreHandler(float newScore, float highScore, float lastScore);
-
-        public delegate void ResetHandler();
-
-        public static event ResetHandler OnReset;
-        public static event ScoreHandler OnScoreChanged;
-        public static event AudioEnabledHandler OnAudioEnabled;
-
         private static GameManager m_Singleton;
-
-        public static GameManager Singleton
-        {
-            get
-            {
-                return m_Singleton;
-            }
-        }
 
         [SerializeField]
         private Character m_MainCharacter;
@@ -43,9 +25,33 @@ namespace PlugBoy
         private bool m_GameRunning = false;
         private bool m_AudioEnabled = true;
 
+        public delegate void AudioEnabledHandler(bool active);
+
+        public delegate void ScoreHandler(float newScore, float highScore, float lastScore);
+
+        public delegate void ResetHandler();
+
+        public static event ResetHandler OnReset;
+        public static event ScoreHandler OnScoreChanged;
+        public static event AudioEnabledHandler OnAudioEnabled;
+
+        #region Level State
+
+        public int m_LevelIndex = 0;
+        public int m_MaxCoin = 0;
         public Property<int> m_Coin = new Property<int>(0);
 
+        #endregion
+
         #region Getters
+
+        public static GameManager Singleton
+        {
+            get
+            {
+                return m_Singleton;
+            }
+        }
         public bool gameStarted
         {
             get
@@ -73,7 +79,8 @@ namespace PlugBoy
         // Easy to use reference to Character.CurrentEnergy
         public Property<float> CurrentEnergy
         {
-            get {
+            get
+            {
                 return m_MainCharacter.CurrentEnergy;
             }
         }
@@ -146,14 +153,14 @@ namespace PlugBoy
         {
             if (m_GameRunning)
             {
-                if (m_MainCharacter.transform.position.x > m_StartScoreX && m_MainCharacter.transform.position.x > m_Score)
-                {
-                    m_Score = m_MainCharacter.transform.position.x;
-                    if (OnScoreChanged != null)
-                    {
-                        OnScoreChanged(m_Score, m_HighScore, m_LastScore);
-                    }
-                }
+                // if (m_MainCharacter.transform.position.x > m_StartScoreX && m_MainCharacter.transform.position.x > m_Score)
+                // {
+                //     m_Score = m_MainCharacter.transform.position.x;
+                //     if (OnScoreChanged != null)
+                //     {
+                //         OnScoreChanged(m_Score, m_HighScore, m_LastScore);
+                //     }
+                // }
             }
         }
 
@@ -166,16 +173,16 @@ namespace PlugBoy
             UIManager.Singleton.OpenScreen(inGameScreen);
         }
 
-        void OnApplicationQuit()
-        {
-            if (m_Score > m_HighScore)
-            {
-                m_HighScore = m_Score;
-            }
-            // SaveGame.Save<int>("coin", m_Coin.Value);
-            // SaveGame.Save<float>("lastScore", m_Score);
-            // SaveGame.Save<float>("highScore", m_HighScore);
-        }
+        // void OnApplicationQuit()
+        // {
+        //     if (m_Score > m_HighScore)
+        //     {
+        //         m_HighScore = m_Score;
+        //     }
+        //     // SaveGame.Save<int>("coin", m_Coin.Value);
+        //     // SaveGame.Save<float>("lastScore", m_Score);
+        //     // SaveGame.Save<float>("highScore", m_HighScore);
+        // }
 
         public void ExitGame()
         {
@@ -203,7 +210,7 @@ namespace PlugBoy
             ResumeGame();
         }
 
-        public void StopGame()
+        public void PauseGame()
         {
             m_GameRunning = false;
             Time.timeScale = 0f;
@@ -218,20 +225,20 @@ namespace PlugBoy
         public void EndGame()
         {
             m_GameStarted = false;
-            StopGame();
+            PauseGame();
             OnReset();
             StartGame();
         }
 
-        public void RespawnMainCharacter()
-        {
-            RespawnCharacter(m_MainCharacter);
-        }
+        // public void RespawnMainCharacter()
+        // {
+        //     RespawnCharacter(m_MainCharacter);
+        // }
 
-        public void RespawnCharacter(Character character)
-        {
-            character.Reset();
-        }
+        // public void RespawnCharacter(Character character)
+        // {
+        //     character.Reset();
+        // }
 
         public void Reset()
         {
@@ -240,6 +247,13 @@ namespace PlugBoy
             {
                 OnReset();
             }
+            LevelManager.Singleton.LoadLevel(m_LevelIndex);
+        }
+
+        public void NextLevel()
+        {
+            print("NEXT LEVEL");
+            LevelManager.Singleton.LoadLevel(m_LevelIndex + 1);
         }
 
         public void EndLevel()
@@ -247,15 +261,9 @@ namespace PlugBoy
             // var loadingScreen = UIManager.Singleton.UISCREENS.Find(el => el.ScreenInfo == UIScreenInfo.LOADING_SCREEN);
             // UIManager.Singleton.OpenScreen(loadingScreen);
             // yield return new WaitForSecondsRealtime(2f);
+            PauseGame();
             var endScreen = UIManager.Singleton.UISCREENS.Find(el => el.ScreenInfo == UIScreenInfo.END_SCREEN);
-            Reset();
             UIManager.Singleton.OpenScreen(endScreen);
-        }
-
-        [System.Serializable]
-        public class LoadEvent : UnityEvent
-        {
-
         }
 
     }

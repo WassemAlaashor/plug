@@ -12,7 +12,7 @@ namespace PlugBoy.UI
 		public override void OnPointerDown (UnityEngine.EventSystems.PointerEventData eventData)
 		{
 			if (IsActive () && IsInteractable ()) {
-				AudioManager.Singleton.PlayClickSound ();
+				// AudioManager.Singleton.PlayClickSound ();
 			}
 			base.OnPointerDown (eventData);
 		}

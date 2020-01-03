@@ -90,7 +90,7 @@ namespace PlugBoy
                             CloseAllScreens();
 
                         OpenScreen(pauseScreen);
-                        GameManager.Singleton.StopGame();
+                        GameManager.Singleton.PauseGame();
                     }
                 }
                 else 

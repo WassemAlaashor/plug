@@ -54,6 +54,8 @@ namespace PlugBoy.Characters
         protected Skeleton m_Skeleton;
         [SerializeField]
         protected Plug m_Plug;
+        [SerializeField]
+        protected List<Renderer> m_ColorRendererList; // Renderers that use color changing shader
 
         [Header("Character Audio")]
         [Space]
@@ -351,10 +353,18 @@ namespace PlugBoy.Characters
                     CurrentEnergy.Value -= distanceCovered * m_DischargeRate;
                 }
             }
-            // Clamp energy
-            Mathf.Clamp(CurrentEnergy.Value, 0, 100);
+            // Clamp 0-100
+           CurrentEnergy.Value = Mathf.Clamp(CurrentEnergy.Value, 0, 100);
             // Reset position for next
             m_PreviousPositionX = transform.position.x;
+
+            // Color change
+            // Shader.SetGlobalVector ?
+            float newHue = 1 - (0.004f * CurrentEnergy.Value);
+            foreach (Renderer rend in m_ColorRendererList)
+            {
+                rend.material.SetVector("_HSVAAdjust", new Vector4(newHue, 0, 0, 0));
+            }
         }
 
         protected void InputCheck()
