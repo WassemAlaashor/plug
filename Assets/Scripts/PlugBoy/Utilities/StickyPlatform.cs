@@ -17,7 +17,6 @@ namespace PlugBoy.Utilities
         {
             if (col.gameObject.tag == "Player")
             {
-                print("Player stick.");
                 m_PlayerRoot.transform.SetParent(transform);
             }
         }

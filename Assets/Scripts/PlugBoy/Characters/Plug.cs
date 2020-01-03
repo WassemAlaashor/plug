@@ -15,6 +15,8 @@ namespace PlugBoy.Characters
         [SerializeField]
         protected Transform m_PlugEndPoint;
 
+        protected Transform m_DefaultParentTransform;
+
         protected SpriteRenderer m_SpriteDisconnected;
         protected SpriteRenderer m_SpriteConnected;
         protected Rigidbody2D m_RigidBody;
@@ -22,13 +24,19 @@ namespace PlugBoy.Characters
         protected Vector3 m_PlugEndPointInitialLocalPosition;
         protected bool m_Connected;
         protected Outlet m_ConnectedOutlet;
+
         public virtual bool Connected {
             get {
                 return m_Connected;
             }
         }
-        public delegate void PlugConnectedHandler();
-        public event PlugConnectedHandler OnPlugConnected;
+        public virtual Outlet ConnectedOutlet {
+            get {
+                return m_ConnectedOutlet;
+            }
+        }
+        // public delegate void PlugConnectedHandler();
+        // public event PlugConnectedHandler OnPlugConnected;
         // public event PlugConnectedHandler OnPlugDisconnected;
 
 
@@ -39,13 +47,14 @@ namespace PlugBoy.Characters
             m_RigidBody = GetComponent<Rigidbody2D>();
             m_DistanceJoint = GetComponent<DistanceJoint2D>();
             m_PlugEndPointInitialLocalPosition = m_PlugEndPoint.localPosition;
+            m_DefaultParentTransform = transform.parent;
         }
 
-        void Update()
-        {
-            // Angle correction
+        // void Update()
+        // {
+            // // Angle correction
             // transform.localRotation = Quaternion.Euler(transform.localRotation.x, transform.localRotation.y, m_Cable.GetTailAngle() + 90f);
-        }
+        // }
 
         void OnTriggerEnter2D(Collider2D collidedObj)
         {
@@ -55,24 +64,25 @@ namespace PlugBoy.Characters
                 // fixedJoint: plug-outlet
                 ConnectToOutlet(collidedObj.gameObject);
             }
-            // else if (collidedObj.tag == "Outlet")
-            // {
-            //     print("PLUG: OUTER COLLIDER");
-            // }
         }
 
-        void ConnectToOutlet(GameObject collidedOutlet)
+        protected void ConnectToOutlet(GameObject collidedOutlet)
         {
             transform.position = collidedOutlet.transform.position;
             transform.rotation = Quaternion.identity;
             m_RigidBody.constraints = RigidbodyConstraints2D.FreezeAll;
             m_SpriteDisconnected.enabled = false;
             m_SpriteConnected.enabled = true;
-            m_PlugEndPoint.localPosition = new Vector3(0, 0, 0);
+            m_PlugEndPoint.localPosition = Vector3.zero;
             m_Connected = true;
             m_ConnectedOutlet = collidedOutlet.transform.parent.GetComponent<Outlet>();
             m_ConnectedOutlet.PlugConnected = true;
-            OnPlugConnected(); // Fire event
+            
+            // If the outlet moves in any way, the plug has to move with it
+            // Easily producable with a moving platform and an outlet as a child
+            transform.parent = m_ConnectedOutlet.transform;
+            
+            // OnPlugConnected(); // Fire event
         }
 
         public virtual void DisconnectFromOutlet()
@@ -83,6 +93,8 @@ namespace PlugBoy.Characters
             m_PlugEndPoint.localPosition = m_PlugEndPointInitialLocalPosition;
             m_Connected = false;
             m_ConnectedOutlet.PlugConnected = false;
+
+            transform.parent = m_DefaultParentTransform;
             // OnPlugDisconnected(); // Fire event
         }
 

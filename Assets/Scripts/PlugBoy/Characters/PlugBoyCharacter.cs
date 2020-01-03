@@ -26,6 +26,8 @@ namespace PlugBoy.Characters
         [SerializeField]
         protected float m_JumpStrength = 10f;
         [SerializeField]
+        protected float m_DischargeRate = 5f;
+        [SerializeField]
         protected string[] m_Actions = new string[0];
         [SerializeField]
         protected int m_CurrentActionIndex = 0;
@@ -75,6 +77,7 @@ namespace PlugBoy.Characters
         protected int m_CurrentFootstepSoundIndex = 0;
         protected Vector3 m_InitialScale;
         protected Vector3 m_InitialPosition;
+        protected float m_PreviousPositionX;
 
         #endregion
 
@@ -247,12 +250,13 @@ namespace PlugBoy.Characters
         void Awake()
         {
             m_InitialPosition = transform.position;
+            m_PreviousPositionX = m_InitialPosition.x;
             m_InitialScale = transform.localScale;
             m_GroundCheck.OnGrounded += GroundCheck_OnGrounded;
             m_Skeleton.OnActiveChanged += Skeleton_OnActiveChanged;
-            m_Plug.OnPlugConnected += Plug_OnPlugConnected;
+            // m_Plug.OnPlugConnected += Plug_OnPlugConnected;
             IsDead = new Property<bool>(false);
-            CurrentHP = new Property<int>(1000);
+            CurrentEnergy = new Property<float>(100);
             m_ClosingEye = false;
             m_CurrentFootstepSoundIndex = 0;
             GameManager.OnReset += GameManager_OnReset;
@@ -265,42 +269,20 @@ namespace PlugBoy.Characters
                 return;
             }
 
-            if (transform.position.y < -2f || CurrentHP.Value < 1)
-            {
-                Die();
-            }
+            DeathCheck();
 
             // Speed
             m_Speed = new Vector2(Mathf.Abs(m_Rigidbody2D.velocity.x), Mathf.Abs(m_Rigidbody2D.velocity.y));
-
-            // Speed Calculations
-
             m_CurrentRunSpeed = m_RunSpeed;
             if (m_Speed.x >= m_RunSpeed)
             {
                 m_CurrentRunSpeed = Mathf.SmoothDamp(m_Speed.x, m_MaxRunSpeed, ref m_CurrentSmoothVelocity, m_RunSmoothTime);
             }
 
-            if (Input.GetButtonDown("Sprint"))
-            {
-                m_CurrentRunSpeed *= m_SprintMultiplier;
-                print("SHIFT DOWN");
-            }
-            if (Input.GetButtonUp("Sprint"))
-            {
-                m_CurrentRunSpeed /= m_SprintMultiplier;
-                print("SHIFT UP");
-            }
+            InputCheck();
 
-            Move(Input.GetAxis("Horizontal"));
-            if (Input.GetButtonDown("Jump"))
-            {
-                Jump();
-            }
-            if (IsDead.Value && !m_ClosingEye)
-            {
-                StartCoroutine(CloseEye());
-            }
+            DischargeCheck();
+
         }
 
         void LateUpdate()
@@ -343,6 +325,60 @@ namespace PlugBoy.Characters
 
         #region Private Methods
 
+        protected void DischargeCheck()
+        {
+            // Outlet discharge
+            if (m_Plug.Connected && m_Plug.ConnectedOutlet.Discharger)
+            {
+                CurrentEnergy.Value -= m_Plug.ConnectedOutlet.DischargeRate / 100; // FIXME: Maybe a better way?
+            }
+
+            // Movement discharge
+            if (m_Moving && GroundCheck.IsGrounded) // Have input and is grounded
+            {
+                // Discharge
+                float distanceCovered = Mathf.Abs(m_PreviousPositionX - transform.position.x);
+                if (distanceCovered > 0.01f) // To prevent jitter
+                {
+                    CurrentEnergy.Value -= distanceCovered * m_DischargeRate;
+                }
+            }
+            // Reset
+            m_PreviousPositionX = transform.position.x;
+        }
+
+        protected void InputCheck()
+        {
+
+            if (Input.GetButtonDown("Sprint"))
+            {
+                m_CurrentRunSpeed *= m_SprintMultiplier;
+            }
+            if (Input.GetButtonUp("Sprint"))
+            {
+                m_CurrentRunSpeed /= m_SprintMultiplier;
+            }
+
+            Move(Input.GetAxis("Horizontal"));
+            if (Input.GetButtonDown("Jump"))
+            {
+                Jump();
+            }
+        }
+
+        protected void DeathCheck()
+        {
+            if (transform.position.y < -2f || CurrentEnergy.Value < 1)
+            {
+                Die();
+            }
+
+            if (IsDead.Value && !m_ClosingEye)
+            {
+                StartCoroutine(CloseEye());
+            }
+        }
+
         IEnumerator CloseEye()
         {
             m_ClosingEye = true;
@@ -381,6 +417,7 @@ namespace PlugBoy.Characters
         {
             if (!IsDead.Value)
             {
+                bool isMoving = false;
                 float speed = m_CurrentRunSpeed;
 
                 Vector2 velocity = m_Rigidbody2D.velocity;
@@ -392,26 +429,18 @@ namespace PlugBoy.Characters
                     Vector3 scale = transform.localScale;
                     scale.x = Mathf.Sign(horizontalAxis);
                     transform.localScale = scale;
+                    isMoving = true;
                 }
                 else if (horizontalAxis < 0f)
                 {
                     Vector3 scale = transform.localScale;
                     scale.x = Mathf.Sign(horizontalAxis);
                     transform.localScale = scale;
+                    isMoving = true;
                 }
 
-                if (m_Plug.Connected)
-                {
-                    // Move input check for RunParticle edge case
-                    if (horizontalAxis != 0)
-                    {
-                        m_Moving = true;
-                    }
-                    else
-                    {
-                        m_Moving = false;
-                    }
-                }
+                // Move input check for RunParticle edge case and discharge
+                m_Moving = isMoving;
             }
         }
 
@@ -475,7 +504,7 @@ namespace PlugBoy.Characters
         public override void Reset()
         {
             IsDead.Value = false;
-            CurrentHP.Value = 1000;
+            CurrentEnergy.Value = 100;
             m_ClosingEye = false;
             m_CurrentFootstepSoundIndex = 0;
             transform.position = m_InitialPosition;
@@ -510,10 +539,11 @@ namespace PlugBoy.Characters
             }
         }
 
-        void Plug_OnPlugConnected()
-        {
-            print("CHARACTER: PLUG CONNECTED");
-        }
+        // void Plug_OnPlugConnected()
+        // {
+        //     print("CHARACTER: PLUG CONNECTED");
+
+        // }
 
         #endregion
 

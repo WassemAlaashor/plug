@@ -6,32 +6,74 @@ public class Outlet : MonoBehaviour
 
     [SerializeField]
     protected GameObject m_OutletTrigger;
+
+    [SerializeField]
+    protected bool m_Discharger = false;
+    [SerializeField]
+    protected float m_DischargeRate = 0;
+    [SerializeField]
+    protected ParticleSystem m_ParticleSystem;
     protected bool m_ForceActive = false;
     protected bool m_PlugConnected = false;
     protected PointEffector2D m_PointEffector;
     protected CircleCollider2D m_ConnectTrigger;
     protected CircleCollider2D m_ForceCollider;
 
-    public virtual bool ForceActive {
-        get {
+    public virtual bool Discharger
+    {
+        get
+        {
+            return m_Discharger;
+        }
+    }
+
+    public virtual float DischargeRate
+    {
+        get
+        {
+            return m_DischargeRate;
+        }
+    }
+    public virtual bool ForceActive
+    {
+        get
+        {
             return m_ForceActive;
         }
-        set {
+        set
+        {
             m_ForceActive = value;
         }
     }
 
-    public virtual bool PlugConnected {
-        get {
+    public virtual bool PlugConnected
+    {
+        get
+        {
             return m_PlugConnected;
         }
-        set {
+        set
+        {
+            if (m_ParticleSystem) // FIXME
+            {
+                if (value) {
+                    m_ParticleSystem.Play();
+                }
+                else
+                {
+                    m_ParticleSystem.Stop();
+                }
+            }
             m_PlugConnected = value;
         }
     }
 
     void Start()
     {
+        if (m_ParticleSystem)
+        {
+            m_ParticleSystem.Stop();
+        }
         m_PointEffector = GetComponent<PointEffector2D>();
         m_ConnectTrigger = m_OutletTrigger.GetComponent<CircleCollider2D>();
         // Finding force collider (which is the outer collider)

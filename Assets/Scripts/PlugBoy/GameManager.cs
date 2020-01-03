@@ -43,12 +43,7 @@ namespace PlugBoy
         private bool m_GameRunning = false;
         private bool m_AudioEnabled = true;
 
-        /// <summary>
-        /// This is my developed callbacks compoents, because callbacks are so dangerous to use we need something that automate the sub/unsub to functions
-        /// with this in-house developed callbacks feature, we garantee that the callback will be removed when we don't need it.
-        /// </summary>
         public Property<int> m_Coin = new Property<int>(0);
-
 
         #region Getters
         public bool gameStarted
@@ -74,6 +69,15 @@ namespace PlugBoy
                 return m_AudioEnabled;
             }
         }
+
+        // Easy to use reference to Character.CurrentEnergy
+        public Property<float> CurrentEnergy
+        {
+            get {
+                return m_MainCharacter.CurrentEnergy;
+            }
+        }
+
         #endregion
 
         void Awake()
