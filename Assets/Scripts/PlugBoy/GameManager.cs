@@ -242,6 +242,16 @@ namespace PlugBoy
             }
         }
 
+        public void EndLevel()
+        {
+            // var loadingScreen = UIManager.Singleton.UISCREENS.Find(el => el.ScreenInfo == UIScreenInfo.LOADING_SCREEN);
+            // UIManager.Singleton.OpenScreen(loadingScreen);
+            // yield return new WaitForSecondsRealtime(2f);
+            var endScreen = UIManager.Singleton.UISCREENS.Find(el => el.ScreenInfo == UIScreenInfo.END_SCREEN);
+            Reset();
+            UIManager.Singleton.OpenScreen(endScreen);
+        }
+
         [System.Serializable]
         public class LoadEvent : UnityEvent
         {

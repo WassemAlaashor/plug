@@ -299,7 +299,7 @@ namespace PlugBoy.Characters
             // Outlet collider
             if (collidedObj.tag == "Outlet" && collidedObj.usedByEffector == false)
             {
-                print("CHARACTER: Entered outlet collider");
+                // print("CHARACTER: Entered outlet collider");
                 // Activate the outlet
                 Outlet outlet = collidedObj.gameObject.GetComponent<Outlet>();
                 outlet.ForceActive = true;
@@ -313,7 +313,7 @@ namespace PlugBoy.Characters
             // Outlet force collider (outer collider)
             if (collidedObj.tag == "Outlet" && collidedObj.usedByEffector == true)
             {
-                print("CHARACTER: Exited force collider");
+                // print("CHARACTER: Exited force collider");
                 Outlet outlet = collidedObj.gameObject.GetComponent<Outlet>();
                 outlet.ForceActive = false;
                 m_Plug.DisconnectFromOutlet();
@@ -328,9 +328,17 @@ namespace PlugBoy.Characters
         protected void DischargeCheck()
         {
             // Outlet discharge
-            if (m_Plug.Connected && m_Plug.ConnectedOutlet.Discharger)
+            if (m_Plug.Connected)
             {
-                CurrentEnergy.Value -= m_Plug.ConnectedOutlet.DischargeRate / 100; // FIXME: Maybe a better way?
+                if (m_Plug.ConnectedOutlet.Discharger)
+                {
+                    CurrentEnergy.Value -= m_Plug.ConnectedOutlet.ChargeRate / 100; // FIXME: Maybe a better way?
+                }
+                else
+                {
+                    // Not a discharger, will charge the character
+                    CurrentEnergy.Value += m_Plug.ConnectedOutlet.ChargeRate / 100; // FIXME: Maybe a better way?
+                }
             }
 
             // Movement discharge
@@ -343,7 +351,9 @@ namespace PlugBoy.Characters
                     CurrentEnergy.Value -= distanceCovered * m_DischargeRate;
                 }
             }
-            // Reset
+            // Clamp energy
+            Mathf.Clamp(CurrentEnergy.Value, 0, 100);
+            // Reset position for next
             m_PreviousPositionX = transform.position.x;
         }
 

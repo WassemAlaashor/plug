@@ -84,7 +84,8 @@ namespace PlugBoy.Collectables
             // m_ParticleSystem.Play ();
             m_SpriteRenderer.enabled = false;
             m_Collider2D.enabled = false;
-            Destroy(gameObject, m_ParticleSystem.main.duration);
+            GameManager.Singleton.EndLevel();
+            // Destroy(gameObject, m_ParticleSystem.main.duration);
             // AudioManager.Singleton.PlayCoinSound (transform.position);
         }
     }

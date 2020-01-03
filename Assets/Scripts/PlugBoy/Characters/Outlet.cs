@@ -10,7 +10,7 @@ public class Outlet : MonoBehaviour
     [SerializeField]
     protected bool m_Discharger = false;
     [SerializeField]
-    protected float m_DischargeRate = 0;
+    protected float m_ChargeRate = 0; // Discharge if discharger
     [SerializeField]
     protected ParticleSystem m_ParticleSystem;
     protected bool m_ForceActive = false;
@@ -27,11 +27,11 @@ public class Outlet : MonoBehaviour
         }
     }
 
-    public virtual float DischargeRate
+    public virtual float ChargeRate
     {
         get
         {
-            return m_DischargeRate;
+            return m_ChargeRate;
         }
     }
     public virtual bool ForceActive
