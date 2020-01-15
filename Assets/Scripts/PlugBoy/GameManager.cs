@@ -149,20 +149,13 @@ namespace PlugBoy
             StartCoroutine(Load());
         }
 
-        void Update()
-        {
-            if (m_GameRunning)
-            {
-                // if (m_MainCharacter.transform.position.x > m_StartScoreX && m_MainCharacter.transform.position.x > m_Score)
-                // {
-                //     m_Score = m_MainCharacter.transform.position.x;
-                //     if (OnScoreChanged != null)
-                //     {
-                //         OnScoreChanged(m_Score, m_HighScore, m_LastScore);
-                //     }
-                // }
-            }
-        }
+        // void Update()
+        // {
+        //     if (m_GameRunning)
+        //     {
+
+        //     }
+        // }
 
         IEnumerator Load()
         {

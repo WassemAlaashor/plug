@@ -521,6 +521,11 @@ namespace PlugBoy.Characters
             }
         }
 
+        public void Charge(int percent)
+        {
+            CurrentEnergy.Value = Mathf.Clamp(CurrentEnergy.Value + percent, 0, 100);
+        }
+
         public override void Reset()
         {
             IsDead.Value = false;
