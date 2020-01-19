@@ -360,11 +360,11 @@ namespace PlugBoy.Characters
 
             // Color change
             // Shader.SetGlobalVector ?
-            float newHue = 1 - (0.004f * CurrentEnergy.Value);
-            foreach (Renderer rend in m_ColorRendererList)
-            {
-                rend.material.SetVector("_HSVAAdjust", new Vector4(newHue, 0, 0, 0));
-            }
+            // float newHue = 1 - (0.004f * CurrentEnergy.Value);
+            // foreach (Renderer rend in m_ColorRendererList)
+            // {
+            //     rend.material.SetVector("_HSVAAdjust", new Vector4(newHue, 0, 0, 0));
+            // }
         }
 
         protected void InputCheck()
@@ -521,7 +521,7 @@ namespace PlugBoy.Characters
             }
         }
 
-        public void Charge(int percent)
+        public void ExternalCharge(int percent)
         {
             CurrentEnergy.Value = Mathf.Clamp(CurrentEnergy.Value + percent, 0, 100);
         }

@@ -15,7 +15,7 @@ namespace PlugBoy
         private static GameManager m_Singleton;
 
         [SerializeField]
-        private Character m_MainCharacter;
+        private PlugBoyCharacter m_Player;
         private float m_StartScoreX = 0f;
         private float m_HighScore = 0f;
         private float m_LastScore = 0f;
@@ -81,8 +81,13 @@ namespace PlugBoy
         {
             get
             {
-                return m_MainCharacter.CurrentEnergy;
+                return m_Player.CurrentEnergy;
             }
+        }
+
+        public void ExternalCharge(int percent) // FIXME
+        {
+            m_Player.ExternalCharge(percent);
         }
 
         #endregion
@@ -136,8 +141,7 @@ namespace PlugBoy
 
         private void Start()
         {
-            m_MainCharacter.IsDead.AddEventAndFire(UpdateDeathEvent, this);
-            m_StartScoreX = m_MainCharacter.transform.position.x;
+            m_Player.IsDead.AddEventAndFire(UpdateDeathEvent, this);
             Init();
             StartGame();
         }

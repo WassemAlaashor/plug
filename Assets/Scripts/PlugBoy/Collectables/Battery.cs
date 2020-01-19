@@ -19,7 +19,7 @@ namespace PlugBoy.Collectables
         protected Animator m_Animator;
         [SerializeField]
         protected bool m_UseOnTriggerEnter2D = true;
-        protected PlugBoyCharacter m_Player;
+        // protected PlugBoyCharacter m_Player;
 
         public override SpriteRenderer SpriteRenderer
         {
@@ -45,10 +45,10 @@ namespace PlugBoy.Collectables
             }
         }
 
-        private void Start()
-        {
-            m_Player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlugBoyCharacter>();
-        }
+        // private void Start()
+        // {
+        //     m_Player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlugBoyCharacter>();
+        // }
 
         public override bool UseOnTriggerEnter2D
         {
@@ -81,7 +81,7 @@ namespace PlugBoy.Collectables
         public override void Collect()
         {
             // GameManager.Singleton.m_Coin.Value++;
-            m_Player.Charge(50);
+            GameManager.Singleton.ExternalCharge(50);
             m_Animator.SetTrigger(COLLECT_TRIGGER);
             m_ParticleSystem.Play();
             m_SpriteRenderer.enabled = false;
