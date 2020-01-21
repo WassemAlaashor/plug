@@ -28,6 +28,8 @@ namespace PlugBoy.Characters
         [SerializeField]
         protected float m_DischargeRate = 5f;
         [SerializeField]
+        protected float m_LightEnergyMultiplier = 1.2f;
+        [SerializeField]
         protected string[] m_Actions = new string[0];
         [SerializeField]
         protected int m_CurrentActionIndex = 0;
@@ -48,14 +50,13 @@ namespace PlugBoy.Characters
         protected ParticleSystem m_JumpParticleSystem;
         [SerializeField]
         protected ParticleSystem m_WaterParticleSystem;
-        [SerializeField]
-        protected ParticleSystem m_BloodParticleSystem;
+
         [SerializeField]
         protected Skeleton m_Skeleton;
         [SerializeField]
         protected Plug m_Plug;
         [SerializeField]
-        protected List<Renderer> m_ColorRendererList; // Renderers that use color changing shader
+        protected Light m_LampLight;
 
         [Header("Character Audio")]
         [Space]
@@ -213,14 +214,6 @@ namespace PlugBoy.Characters
             }
         }
 
-        public override ParticleSystem BloodParticleSystem
-        {
-            get
-            {
-                return m_BloodParticleSystem;
-            }
-        }
-
         public override Skeleton Skeleton
         {
             get
@@ -259,6 +252,7 @@ namespace PlugBoy.Characters
             // m_Plug.OnPlugConnected += Plug_OnPlugConnected;
             IsDead = new Property<bool>(false);
             CurrentEnergy = new Property<float>(100);
+            m_LampLight.intensity = CurrentEnergy.Value * m_LightEnergyMultiplier;
             m_ClosingEye = false;
             m_CurrentFootstepSoundIndex = 0;
             GameManager.OnReset += GameManager_OnReset;
@@ -353,11 +347,13 @@ namespace PlugBoy.Characters
                     CurrentEnergy.Value -= distanceCovered * m_DischargeRate;
                 }
             }
+
             // Clamp 0-100
-           CurrentEnergy.Value = Mathf.Clamp(CurrentEnergy.Value, 0, 100);
+            CurrentEnergy.Value = Mathf.Clamp(CurrentEnergy.Value, 0, 100);
             // Reset position for next
             m_PreviousPositionX = transform.position.x;
-
+            // Light intensity
+            m_LampLight.intensity = CurrentEnergy.Value * m_LightEnergyMultiplier;
             // Color change
             // Shader.SetGlobalVector ?
             // float newHue = 1 - (0.004f * CurrentEnergy.Value);
@@ -483,23 +479,10 @@ namespace PlugBoy.Characters
 
         public override void Die()
         {
-            Die(false);
-        }
-
-        public override void Die(bool blood)
-        {
             if (!IsDead.Value)
             {
                 IsDead.Value = true;
                 m_Skeleton.SetActive(true, m_Rigidbody2D.velocity);
-                if (blood)
-                {
-                    ParticleSystem particle = Instantiate<ParticleSystem>(
-                                                  m_BloodParticleSystem,
-                                                  transform.position,
-                                                  Quaternion.identity);
-                    Destroy(particle.gameObject, particle.main.duration);
-                }
                 CameraController.Singleton.fastMove = true;
             }
         }

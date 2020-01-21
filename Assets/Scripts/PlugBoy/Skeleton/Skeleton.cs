@@ -27,6 +27,8 @@ namespace PlugBoy
 		[SerializeField]
 		private Rigidbody2D m_Body;
 		[SerializeField]
+		private Rigidbody2D m_Lamp;
+		[SerializeField]
 		private Rigidbody2D m_RightFoot;
 		[SerializeField]
 		private Rigidbody2D m_LeftFoot;
@@ -50,7 +52,7 @@ namespace PlugBoy
 		#region Properties
 
 		public Rigidbody2D Body { get { return m_Body; } }
-
+		public Rigidbody2D Lamp { get { return m_Lamp; } }
 		public Rigidbody2D RightFoot { get { return m_RightFoot; } }
 
 		public Rigidbody2D LeftFoot { get { return m_LeftFoot; } }
@@ -81,6 +83,7 @@ namespace PlugBoy
 				}
 				m_IsActive = active;
 				m_Body.simulated = active;
+				// m_Lamp.simulated = active;
 				m_RightFoot.simulated = active;
 				m_LeftFoot.simulated = active;
 				m_RightHand.simulated = active;

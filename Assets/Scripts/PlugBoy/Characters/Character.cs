@@ -50,8 +50,6 @@ namespace PlugBoy.Characters
 
         public abstract ParticleSystem WaterParticleSystem { get; }
 
-        public abstract ParticleSystem BloodParticleSystem { get; }
-
         public abstract Skeleton Skeleton { get; }
 
         public virtual Property<float> CurrentEnergy { get; set; }
@@ -67,8 +65,6 @@ namespace PlugBoy.Characters
         public abstract void Jump();
 
         public abstract void Die();
-
-        public abstract void Die(bool blood);
 
         public abstract void EmitRunParticle();
 
