@@ -58,7 +58,6 @@ namespace PlugBoy.Collectables
 
         public override void OnTriggerEnter2D(Collider2D other)
         {
-            print("SELAM");
             if (m_UseOnTriggerEnter2D && other.tag == "Player")
             {
                 Collect();
@@ -67,7 +66,6 @@ namespace PlugBoy.Collectables
 
         public override void OnCollisionEnter2D(Collision2D coll)
         {
-            print("SELAM");
             if (!m_UseOnTriggerEnter2D && coll.gameObject.tag == "Player")
             {
                 Collect();
