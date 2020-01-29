@@ -27,8 +27,7 @@ namespace PlugBoy.Characters
         protected float m_JumpStrength = 10f;
         [SerializeField]
         protected float m_DischargeRate = 5f;
-        [SerializeField]
-        protected float m_LightEnergyMultiplier = 1.2f;
+  
         [SerializeField]
         protected string[] m_Actions = new string[0];
         [SerializeField]
@@ -56,7 +55,7 @@ namespace PlugBoy.Characters
         [SerializeField]
         protected Plug m_Plug;
         [SerializeField]
-        protected Light m_LampLight;
+        protected SpriteRenderer m_LampLight;
 
         [Header("Character Audio")]
         [Space]
@@ -252,7 +251,7 @@ namespace PlugBoy.Characters
             // m_Plug.OnPlugConnected += Plug_OnPlugConnected;
             IsDead = new Property<bool>(false);
             CurrentEnergy = new Property<float>(100);
-            m_LampLight.intensity = CurrentEnergy.Value * m_LightEnergyMultiplier;
+            // m_LampLight.intensity = CurrentEnergy.Value * m_LightEnergyMultiplier;
             m_ClosingEye = false;
             m_CurrentFootstepSoundIndex = 0;
             GameManager.OnReset += GameManager_OnReset;
@@ -353,7 +352,9 @@ namespace PlugBoy.Characters
             // Reset position for next
             m_PreviousPositionX = transform.position.x;
             // Light intensity
-            m_LampLight.intensity = CurrentEnergy.Value * m_LightEnergyMultiplier;
+            float intensity = CurrentEnergy.Value / 100;
+            m_LampLight.color = new Color(1, 1, 1, intensity * 170/255);
+            m_LampLight.transform.localScale = new Vector2(intensity * 3, intensity * 3);
             // Color change
             // Shader.SetGlobalVector ?
             // float newHue = 1 - (0.004f * CurrentEnergy.Value);

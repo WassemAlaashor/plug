@@ -36,8 +36,6 @@ namespace PlugBoy
         public static event AudioEnabledHandler OnAudioEnabled;
 
         #region Level State
-
-        public int m_LevelIndex = 0;
         public int m_MaxCoin = 0;
         public Property<int> m_Coin = new Property<int>(0);
 
@@ -134,7 +132,8 @@ namespace PlugBoy
 
             yield return new WaitForSecondsRealtime(1.5f);
 
-            EndGame();
+            // EndGame();
+            Reset();
             // var endScreen = UIManager.Singleton.UISCREENS.Find(el => el.ScreenInfo == UIScreenInfo.END_SCREEN);
             // UIManager.Singleton.OpenScreen(endScreen);
         }
@@ -143,14 +142,15 @@ namespace PlugBoy
         {
             m_Player.IsDead.AddEventAndFire(UpdateDeathEvent, this);
             Init();
-            StartGame();
         }
 
         public void Init()
         {
-            EndGame();
+            // EndGame();
             UIManager.Singleton.Init();
+            // LevelManager.Singleton.LoadCurrentLevel();
             StartCoroutine(Load());
+                // StartGame();
         }
 
         // void Update()
@@ -166,7 +166,7 @@ namespace PlugBoy
             // var startScreen = UIManager.Singleton.UISCREENS.Find(el => el.ScreenInfo == UIScreenInfo.START_SCREEN);
             // yield return new WaitForSecondsRealtime(2f);
             UIManager.Singleton.CloseAllScreens();
-            var startScreen = UIManager.Singleton.UISCREENS.Find(el => el.ScreenInfo == UIScreenInfo.START_SCREEN);
+            UI.UIScreen startScreen = UIManager.Singleton.UISCREENS.Find(el => el.ScreenInfo == UIScreenInfo.START_SCREEN);
             yield return new WaitForSecondsRealtime(1f);
             UIManager.Singleton.OpenScreen(startScreen);
         }
@@ -205,8 +205,8 @@ namespace PlugBoy
         public void StartGame()
         {
             m_GameStarted = true;
-            //
-            var inGameScreen = UIManager.Singleton.UISCREENS.Find(el => el.ScreenInfo == UIScreenInfo.IN_GAME_SCREEN);
+            // Set in-game screen active
+            UI.UIScreen inGameScreen = UIManager.Singleton.UISCREENS.Find(el => el.ScreenInfo == UIScreenInfo.IN_GAME_SCREEN);
             UIManager.Singleton.OpenScreen(inGameScreen);
             ResumeGame();
         }
@@ -228,23 +228,19 @@ namespace PlugBoy
             m_GameStarted = false;
             PauseGame();
             OnReset();
-            StartGame();
+            StartGame(); // TODO
         }
 
         public void Reset()
         {
             m_Score = 0f;
+            PauseGame();
+            OnReset();
+            StartGame();
             if (OnReset != null)
             {
                 OnReset();
             }
-            LevelManager.Singleton.LoadLevel(m_LevelIndex);
-        }
-
-        public void NextLevel()
-        {
-            print("NEXT LEVEL");
-            LevelManager.Singleton.LoadLevel(m_LevelIndex + 1);
         }
 
         public void EndLevel()
@@ -252,9 +248,10 @@ namespace PlugBoy
             // var loadingScreen = UIManager.Singleton.UISCREENS.Find(el => el.ScreenInfo == UIScreenInfo.LOADING_SCREEN);
             // UIManager.Singleton.OpenScreen(loadingScreen);
             // yield return new WaitForSecondsRealtime(2f);
-            PauseGame();
-            var endScreen = UIManager.Singleton.UISCREENS.Find(el => el.ScreenInfo == UIScreenInfo.END_SCREEN);
-            UIManager.Singleton.OpenScreen(endScreen);
+            // PauseGame();
+            Reset();
+            // var endScreen = UIManager.Singleton.UISCREENS.Find(el => el.ScreenInfo == UIScreenInfo.END_SCREEN);
+            // UIManager.Singleton.OpenScreen(endScreen);
         }
 
     }

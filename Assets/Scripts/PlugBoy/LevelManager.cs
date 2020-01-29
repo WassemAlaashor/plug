@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+
 
 namespace PlugBoy
 {
@@ -12,6 +12,10 @@ namespace PlugBoy
 
         [SerializeField]
         private List<GameObject> m_LevelList;
+
+        private int m_CurrentLevelIndex = 0;
+
+        private GameObject m_CurrentLevel;
         public static LevelManager Singleton
         {
             get
@@ -20,10 +24,36 @@ namespace PlugBoy
             }
         }
 
-        public void LoadLevel(int levelNumber)
+        void Start()
         {
-            Instantiate(m_LevelList[levelNumber - 1], Vector3.zero, Quaternion.identity);
-            GameManager.Singleton.Reset();
+            print(m_LevelList[0]);
+        }
+
+        private void LoadLevel(int levelIndex)
+        {
+            m_CurrentLevel = Instantiate(m_LevelList[levelIndex], Vector3.zero, Quaternion.identity);
+            // GameManager.Singleton.Reset();
+        }
+
+        public void LoadCurrentLevel()
+        {
+            LoadLevel(m_CurrentLevelIndex);
+        }
+
+
+        public void LoadNextLevel()
+        {
+            if (m_CurrentLevelIndex < m_LevelList.Count - 1)
+            {
+                m_CurrentLevelIndex++;
+                LoadCurrentLevel();
+            }
+        }
+
+        public void ResetLevel()
+        {
+            Destroy(m_CurrentLevel);
+            LoadCurrentLevel();
         }
 
     }
