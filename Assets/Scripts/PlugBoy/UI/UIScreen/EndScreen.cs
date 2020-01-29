@@ -16,16 +16,16 @@ namespace PlugBoy.UI
         [SerializeField]
         protected Button ExitButton = null;
 
-        private void Start()
-        {
-            // ResetButton.SetButtonAction(() =>
-            // {
-            //     GameManager.Singleton.Reset();
-            //     var ingameScreen = UIManager.Singleton.GetUIScreen(UIScreenInfo.IN_GAME_SCREEN);
-            //     UIManager.Singleton.OpenScreen(ingameScreen);
-            //     GameManager.Singleton.StartGame();
-            // });
-        }
+        // private void Start()
+        // {
+        //     // ResetButton.SetButtonAction(() =>
+        //     // {
+        //     //     GameManager.Singleton.Reset();
+        //     //     var ingameScreen = UIManager.Singleton.GetUIScreen(UIScreenInfo.IN_GAME_SCREEN);
+        //     //     UIManager.Singleton.OpenScreen(ingameScreen);
+        //     //     GameManager.Singleton.StartGame();
+        //     // });
+        // }
 
         public override void UpdateScreenStatus(bool open)
         {

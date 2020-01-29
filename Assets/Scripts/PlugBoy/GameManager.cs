@@ -150,7 +150,7 @@ namespace PlugBoy
             UIManager.Singleton.Init();
             // LevelManager.Singleton.LoadCurrentLevel();
             StartCoroutine(Load());
-                // StartGame();
+            StartGame();
         }
 
         // void Update()
@@ -166,9 +166,9 @@ namespace PlugBoy
             // var startScreen = UIManager.Singleton.UISCREENS.Find(el => el.ScreenInfo == UIScreenInfo.START_SCREEN);
             // yield return new WaitForSecondsRealtime(2f);
             UIManager.Singleton.CloseAllScreens();
-            UI.UIScreen startScreen = UIManager.Singleton.UISCREENS.Find(el => el.ScreenInfo == UIScreenInfo.START_SCREEN);
-            yield return new WaitForSecondsRealtime(1f);
-            UIManager.Singleton.OpenScreen(startScreen);
+            // UI.UIScreen startScreen = UIManager.Singleton.UISCREENS.Find(el => el.ScreenInfo == UIScreenInfo.START_SCREEN);
+            yield return new WaitForSecondsRealtime(0.1f);
+            // UIManager.Singleton.OpenScreen(startScreen);
         }
 
         // void OnApplicationQuit()

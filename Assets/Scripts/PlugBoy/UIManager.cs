@@ -63,15 +63,16 @@ namespace PlugBoy
             Cursor.SetCursor(m_CursorDefaultTexture, Vector2.zero, CursorMode.Auto);
         }
 
-        void Start()
-        {
-            Init();
-        }
+        // void Start()
+        // {
+        //     Init();
+        // }
 
         public void Init()
         {
-            var loadingScreen = GetUIScreen(UIScreenInfo.LOADING_SCREEN);
-            OpenScreen(loadingScreen);
+            // var loadingScreen = GetUIScreen(UIScreenInfo.LOADING_SCREEN);
+            // OpenScreen(loadingScreen);
+            CloseAllScreens();
         }
 
         void Update()
@@ -140,6 +141,7 @@ namespace PlugBoy
 
         public void OpenScreen(UIScreen screen)
         {
+            print(screen.ScreenInfo);
             CloseAllScreens();
             screen.UpdateScreenStatus(true);
             m_ActiveScreen = screen;
