@@ -15,6 +15,10 @@ namespace PlugBoy.UI
 		protected Animator m_Animator;
 		[SerializeField]
 		protected CanvasGroup m_CanvasGroup;
+        [SerializeField]
+        protected Image m_BlurImage;
+        [SerializeField]
+        protected float m_BlurSize = 2.0f;
 
         public bool IsOpen { get; set; }
 
@@ -24,6 +28,14 @@ namespace PlugBoy.UI
             m_CanvasGroup.interactable = open;
             m_CanvasGroup.blocksRaycasts = open;
             IsOpen = open;
+        }
+
+        void Update()
+        {
+            if (m_BlurImage)
+            {
+                m_BlurImage.material.SetFloat("_Size", m_BlurSize);
+            }
         }
 	}
 

@@ -22,13 +22,13 @@ namespace PlugBoy.UI
             {
                 var inGameScreen = UIManager.Singleton.UISCREENS.Find(el => el.ScreenInfo == UIScreenInfo.IN_GAME_SCREEN);
                 UIManager.Singleton.OpenScreen(inGameScreen);
-                GameManager.Singleton.StartGame();
+                GameManager.Singleton.ResumeGame();
             });
 
-            HomeButton.SetButtonAction(() =>
-            {
-                GameManager.Singleton.Init();
-            });
+            // HomeButton.SetButtonAction(() =>
+            // {
+            //     GameManager.Singleton.Init();
+            // });
         }
 
         public override void UpdateScreenStatus(bool open)

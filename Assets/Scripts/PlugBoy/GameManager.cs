@@ -149,7 +149,7 @@ namespace PlugBoy
             // EndGame();
             UIManager.Singleton.Init();
             // LevelManager.Singleton.LoadCurrentLevel();
-            StartCoroutine(Load());
+            // StartCoroutine(Load());
             StartGame();
         }
 
@@ -161,15 +161,15 @@ namespace PlugBoy
         //     }
         // }
 
-        IEnumerator Load()
-        {
-            // var startScreen = UIManager.Singleton.UISCREENS.Find(el => el.ScreenInfo == UIScreenInfo.START_SCREEN);
-            // yield return new WaitForSecondsRealtime(2f);
-            UIManager.Singleton.CloseAllScreens();
-            // UI.UIScreen startScreen = UIManager.Singleton.UISCREENS.Find(el => el.ScreenInfo == UIScreenInfo.START_SCREEN);
-            yield return new WaitForSecondsRealtime(0.1f);
-            // UIManager.Singleton.OpenScreen(startScreen);
-        }
+        // IEnumerator Load()
+        // {
+        //     // var startScreen = UIManager.Singleton.UISCREENS.Find(el => el.ScreenInfo == UIScreenInfo.START_SCREEN);
+        //     // yield return new WaitForSecondsRealtime(2f);
+        //     // UIManager.Singleton.CloseAllScreens();
+        //     // UI.UIScreen startScreen = UIManager.Singleton.UISCREENS.Find(el => el.ScreenInfo == UIScreenInfo.START_SCREEN);
+        //     yield return new WaitForSecondsRealtime(0.1f);
+        //     // UIManager.Singleton.OpenScreen(startScreen);
+        // }
 
         // void OnApplicationQuit()
         // {
@@ -215,10 +215,14 @@ namespace PlugBoy
         {
             m_GameRunning = false;
             Time.timeScale = 0f;
+            // UI.UIScreen pauseScreen = UIManager.Singleton.UISCREENS.Find(el => el.ScreenInfo == UIScreenInfo.PAUSE_SCREEN);
+            // UIManager.Singleton.OpenScreen(pauseScreen);
         }
 
         public void ResumeGame()
         {
+            // UI.UIScreen inGameScreen = UIManager.Singleton.UISCREENS.Find(el => el.ScreenInfo == UIScreenInfo.IN_GAME_SCREEN);
+            // UIManager.Singleton.OpenScreen(inGameScreen);
             m_GameRunning = true;
             Time.timeScale = 1f;
         }

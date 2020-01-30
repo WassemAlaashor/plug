@@ -77,34 +77,34 @@ namespace PlugBoy
 
         void Update()
         {
-            if (Input.GetButtonDown("Cancel"))
-            {
-                var pauseScreen = GetUIScreen(UIScreenInfo.PAUSE_SCREEN);
-                var ingameScreen = GetUIScreen(UIScreenInfo.IN_GAME_SCREEN);
+            // if (Input.GetButtonDown("Cancel"))
+            // {
+            //     var pauseScreen = GetUIScreen(UIScreenInfo.PAUSE_SCREEN);
+            //     var ingameScreen = GetUIScreen(UIScreenInfo.IN_GAME_SCREEN);
 
-                // If the pause screen is not open, open it otherwise close it
-                if (!pauseScreen.IsOpen)
-                {
-                    if(m_ActiveScreen == ingameScreen)
-                    {
-                        if (IsAsScreenOpen())
-                            CloseAllScreens();
+            //     // If the pause screen is not open, open it otherwise close it
+            //     if (!pauseScreen.IsOpen)
+            //     {
+            //         if(m_ActiveScreen == ingameScreen)
+            //         {
+            //             if (IsAsScreenOpen())
+            //                 CloseAllScreens();
 
-                        OpenScreen(pauseScreen);
-                        GameManager.Singleton.PauseGame();
-                    }
-                }
-                else 
-                {
-                    if (m_ActiveScreen == pauseScreen)
-                    {
-                        CloseScreen(pauseScreen);
-                        OpenScreen(ingameScreen);
-                        // We are sure that we want to resume the game when we close a screen
-                        GameManager.Singleton.ResumeGame();
-                    }
-                }
-            }
+            //             OpenScreen(pauseScreen);
+            //             GameManager.Singleton.PauseGame();
+            //         }
+            //     }
+            //     else 
+            //     {
+            //         if (m_ActiveScreen == pauseScreen)
+            //         {
+            //             CloseScreen(pauseScreen);
+            //             OpenScreen(ingameScreen);
+            //             // We are sure that we want to resume the game when we close a screen
+            //             GameManager.Singleton.ResumeGame();
+            //         }
+            //     }
+            // }
 
             if (Input.GetMouseButtonDown(0))
             {
@@ -141,10 +141,10 @@ namespace PlugBoy
 
         public void OpenScreen(UIScreen screen)
         {
-            print(screen.ScreenInfo);
             CloseAllScreens();
             screen.UpdateScreenStatus(true);
             m_ActiveScreen = screen;
+            print(screen.ScreenInfo);
         }
 
         public void CloseScreen(UIScreen screen)
@@ -158,6 +158,7 @@ namespace PlugBoy
 
         public void CloseAllScreens()
         {
+            print("CLOSE ALL SCREENS");
             foreach (var screen in m_Screens)
                 CloseScreen(screen);
         }
