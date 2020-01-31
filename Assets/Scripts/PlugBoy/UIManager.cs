@@ -141,6 +141,7 @@ namespace PlugBoy
 
         public void OpenScreen(UIScreen screen)
         {
+            print("OPENING SCREEN: " + screen.ScreenInfo);
             CloseAllScreens();
             screen.UpdateScreenStatus(true);
             m_ActiveScreen = screen;

@@ -6,7 +6,6 @@ using UnityEngine.Events;
 
 using PlugBoy.Characters;
 using PlugBoy.Collectables;
-using PlugBoy.TerrainGeneration;
 
 namespace PlugBoy
 {
@@ -260,10 +259,10 @@ namespace PlugBoy
             // var loadingScreen = UIManager.Singleton.UISCREENS.Find(el => el.ScreenInfo == UIScreenInfo.LOADING_SCREEN);
             // UIManager.Singleton.OpenScreen(loadingScreen);
             // yield return new WaitForSecondsRealtime(2f);
-            // PauseGame();
-            Reset();
-            // var endScreen = UIManager.Singleton.UISCREENS.Find(el => el.ScreenInfo == UIScreenInfo.END_SCREEN);
-            // UIManager.Singleton.OpenScreen(endScreen);
+            PauseGame();
+            UI.UIScreen endScreen = UIManager.Singleton.UISCREENS.Find(el => el.ScreenInfo == UIScreenInfo.END_SCREEN);
+            UIManager.Singleton.OpenScreen(endScreen);
+            // Reset();
         }
 
     }

@@ -15,9 +15,6 @@ namespace PlugBoy
         [SerializeField]
         private float m_TransitionTime = 1.0f;
 
-        private int m_CurrentLevelIndex = 0;
-
-        private GameObject m_CurrentLevel;
         public static LevelManager Singleton
         {
             get
@@ -26,41 +23,47 @@ namespace PlugBoy
             }
         }
 
-        // void Start()
-        // {
-            // print(m_LevelList[0]);
-        // }
+        void Awake()
+        {
+            if (m_Singleton != null)
+            {
+                Destroy(gameObject);
+                return;
+            }
+
+            m_Singleton = this;
+        }
 
         IEnumerator LoadLevel(int levelIndex)
         {
-            // m_CurrentLevel = Instantiate(m_LevelList[levelIndex], Vector3.zero, Quaternion.identity);
-            // GameManager.Singleton.Reset();
+            // Start transition
             m_Transition.SetTrigger("Start");
-
-            yield return new WaitForSeconds(m_TransitionTime);
-
+            // Wait for the transition
             SceneManager.LoadScene(levelIndex);
-            m_CurrentLevelIndex = levelIndex;
+            yield return new WaitForSeconds(m_TransitionTime);
         }
 
-        public void LoadCurrentLevel()
-        {
-            LoadLevel(m_CurrentLevelIndex);
-        }
+        // public void LoadCurrentLevel()
+        // {
+        //     LoadLevel(SceneManager.GetActiveScene().buildIndex);
+        // }
 
 
         public void LoadNextLevel()
         {
-            // if (m_CurrentLevelIndex < m_LevelList.Count - 1)
-            // {
-                StartCoroutine(LoadLevel(m_CurrentLevelIndex + 1));
-            // }
+            print("LevelManager: LoadNextLevel");
+            print("Current: " + SceneManager.GetActiveScene().buildIndex);
+            print("Next: " + SceneManager.GetActiveScene().buildIndex + 1);
+            if (SceneManager.GetActiveScene().buildIndex + 1 < SceneManager.sceneCountInBuildSettings)
+            {
+                 StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex + 1));
+            }
         }
 
         public void ResetLevel()
         {
-            // Destroy(m_CurrentLevel);
-            // LoadCurrentLevel();
+            print("LevelManager: ResetLevel");
+            StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex));
         }
 
     }

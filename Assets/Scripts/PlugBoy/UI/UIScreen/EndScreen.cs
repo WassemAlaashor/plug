@@ -10,22 +10,17 @@ namespace PlugBoy.UI
         [SerializeField]
         protected Button NextButton = null;
         [SerializeField]
-        protected Button ResetButton = null;
+        protected Button RestartButton = null;
         [SerializeField]
         protected Button HomeButton = null;
         [SerializeField]
         protected Button ExitButton = null;
 
-        // private void Start()
-        // {
-        //     // ResetButton.SetButtonAction(() =>
-        //     // {
-        //     //     GameManager.Singleton.Reset();
-        //     //     var ingameScreen = UIManager.Singleton.GetUIScreen(UIScreenInfo.IN_GAME_SCREEN);
-        //     //     UIManager.Singleton.OpenScreen(ingameScreen);
-        //     //     GameManager.Singleton.StartGame();
-        //     // });
-        // }
+        private void Start()
+        {
+            NextButton.SetButtonAction(() => LevelManager.Singleton.LoadNextLevel());
+            RestartButton.SetButtonAction(() => LevelManager.Singleton.ResetLevel());
+        }
 
         public override void UpdateScreenStatus(bool open)
         {

@@ -259,7 +259,7 @@ namespace PlugBoy.Characters
 
         void Update()
         {
-            if (!GameManager.Singleton.gameStarted || !GameManager.Singleton.gameRunning)
+            if (GameManager.Singleton == null || !GameManager.Singleton.gameStarted || !GameManager.Singleton.gameRunning)
             {
                 return;
             }
@@ -377,6 +377,7 @@ namespace PlugBoy.Characters
             }
 
             Move(Input.GetAxis("Horizontal"));
+
             if (Input.GetButtonDown("Jump"))
             {
                 Jump();
