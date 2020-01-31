@@ -144,7 +144,6 @@ namespace PlugBoy
             CloseAllScreens();
             screen.UpdateScreenStatus(true);
             m_ActiveScreen = screen;
-            print(screen.ScreenInfo);
         }
 
         public void CloseScreen(UIScreen screen)
@@ -158,7 +157,6 @@ namespace PlugBoy
 
         public void CloseAllScreens()
         {
-            print("CLOSE ALL SCREENS");
             foreach (var screen in m_Screens)
                 CloseScreen(screen);
         }

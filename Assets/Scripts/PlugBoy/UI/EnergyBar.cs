@@ -14,7 +14,7 @@ namespace PlugBoy.UI
         {
             if (m_Slider)
             {
-                m_Slider.value = GameManager.Singleton.CurrentEnergy.Value;
+                m_Slider.value = GameManager.Singleton.Player.CurrentEnergy.Value;
             }
         }
     }

@@ -19,12 +19,12 @@ namespace PlugBoy.UI
 
         protected override void Start()
         {
-            GameManager.Singleton.CurrentEnergy.AddEventAndFire(UpdateEnergyText, this);
+            GameManager.Singleton.Player.CurrentEnergy.AddEventAndFire(UpdateEnergyText, this);
         }
 
         private void UpdateEnergyText(float newEnergyValue)
         {
-            float correctedValue = Mathf.Clamp(Mathf.RoundToInt(newEnergyValue), 0, 100);
+            float correctedValue = Mathf.Clamp(Mathf.Floor(newEnergyValue), 0, 100);
             text = string.Format(m_EnergyTextFormat, correctedValue);
         }
     }

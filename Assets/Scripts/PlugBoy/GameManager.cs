@@ -74,12 +74,20 @@ namespace PlugBoy
             }
         }
 
-        // Easy to use reference to Character.CurrentEnergy
-        public Property<float> CurrentEnergy
+        // public Property<float> CurrentEnergy
+        // {
+        //     get
+        //     {
+        //         return m_Player.CurrentEnergy;
+        //     }
+        // }
+
+        // Easy to use reference to Player // FIXME: Maybe singleton?
+        public PlugBoyCharacter Player
         {
             get
             {
-                return m_Player.CurrentEnergy;
+                return m_Player;
             }
         }
 

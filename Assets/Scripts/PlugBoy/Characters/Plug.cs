@@ -43,7 +43,7 @@ namespace PlugBoy.Characters
         void Start()
         {
             m_SpriteDisconnected = GetComponent<SpriteRenderer>();
-            m_SpriteConnected = GameObject.Find("Plug Connected Sprite").GetComponent<SpriteRenderer>();
+            m_SpriteConnected = GameObject.Find("Plug Connected Sprite").GetComponent<SpriteRenderer>(); // FIXME
             m_RigidBody = GetComponent<Rigidbody2D>();
             m_DistanceJoint = GetComponent<DistanceJoint2D>();
             m_PlugEndPointInitialLocalPosition = m_PlugEndPoint.localPosition;

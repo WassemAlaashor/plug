@@ -62,6 +62,8 @@ namespace PlugBoy.Characters
 
         public abstract void Move(float horizontalAxis);
 
+        public abstract void OffsetPosition(Vector3 offset);
+
         public abstract void Jump();
 
         public abstract void Die();

@@ -461,6 +461,16 @@ namespace PlugBoy.Characters
             }
         }
 
+        public override void OffsetPosition(Vector3 offset)
+        {
+            // Moving platforms offset player position
+            // for a better player movement.
+            if (m_Moving)
+            {
+                transform.position = transform.position + offset;
+            }
+        }
+
         public override void Jump()
         {
             if (!IsDead.Value)
