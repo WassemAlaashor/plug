@@ -70,7 +70,7 @@ namespace PlugBoy.Characters
 
         public abstract void EmitRunParticle();
 
-        public abstract void Reset();
+        // public abstract void Reset();
 
     }
 

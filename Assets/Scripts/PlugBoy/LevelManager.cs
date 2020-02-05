@@ -51,18 +51,14 @@ namespace PlugBoy
 
         public void LoadNextLevel()
         {
-            print("LevelManager: LoadNextLevel");
-            print("Current: " + SceneManager.GetActiveScene().buildIndex);
-            print("Next: " + SceneManager.GetActiveScene().buildIndex + 1);
             if (SceneManager.GetActiveScene().buildIndex + 1 < SceneManager.sceneCountInBuildSettings)
             {
-                 StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex + 1));
+                StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex + 1));
             }
         }
 
         public void ResetLevel()
         {
-            print("LevelManager: ResetLevel");
             StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex));
         }
 

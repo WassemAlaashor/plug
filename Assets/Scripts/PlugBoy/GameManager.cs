@@ -239,15 +239,16 @@ namespace PlugBoy
             m_GameStarted = false;
             PauseGame();
             OnReset();
-            StartGame(); // TODO
+            // StartGame(); // TODO
         }
 
         public void Reset()
         {
             m_Score = 0f;
-            PauseGame();
-            OnReset();
-            StartGame();
+            // PauseGame();
+            // OnReset();
+            // StartGame();
+            LevelManager.Singleton.ResetLevel();
             if (OnReset != null)
             {
                 OnReset();

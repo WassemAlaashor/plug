@@ -254,7 +254,7 @@ namespace PlugBoy.Characters
             // m_LampLight.intensity = CurrentEnergy.Value * m_LightEnergyMultiplier;
             m_ClosingEye = false;
             m_CurrentFootstepSoundIndex = 0;
-            GameManager.OnReset += GameManager_OnReset;
+            // GameManager.OnReset += GameManager_OnReset;
         }
 
         void Update()
@@ -521,27 +521,27 @@ namespace PlugBoy.Characters
             CurrentEnergy.Value = Mathf.Clamp(CurrentEnergy.Value + percent, 0, 100);
         }
 
-        public override void Reset()
-        {
-            IsDead.Value = false;
-            CurrentEnergy.Value = 100;
-            m_ClosingEye = false;
-            m_CurrentFootstepSoundIndex = 0;
-            transform.position = m_InitialPosition;
-            transform.localScale = m_InitialScale;
-            m_Plug.transform.position = m_InitialPosition; // TODO: Custom respawn for plug
-            m_Rigidbody2D.velocity = Vector2.zero;
-            m_Skeleton.SetActive(false, m_Rigidbody2D.velocity);
-        }
+        // public override void Reset()
+        // {
+        //     IsDead.Value = false;
+        //     CurrentEnergy.Value = 100;
+        //     m_ClosingEye = false;
+        //     m_CurrentFootstepSoundIndex = 0;
+        //     transform.position = m_InitialPosition;
+        //     transform.localScale = m_InitialScale;
+        //     m_Plug.transform.position = m_InitialPosition; // TODO: Custom respawn for plug
+        //     m_Rigidbody2D.velocity = Vector2.zero;
+        //     m_Skeleton.SetActive(false, m_Rigidbody2D.velocity);
+        // }
 
         #endregion
 
         #region Events
 
-        void GameManager_OnReset()
-        {
-            Reset();
-        }
+        // void GameManager_OnReset()
+        // {
+        //     Reset();
+        // }
 
         void Skeleton_OnActiveChanged(bool active)
         {

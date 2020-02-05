@@ -22,6 +22,8 @@ namespace PlugBoy.UI
             RestartButton.SetButtonAction(() => LevelManager.Singleton.ResetLevel());
         }
 
+
+
         public override void UpdateScreenStatus(bool open)
         {
             base.UpdateScreenStatus(open);

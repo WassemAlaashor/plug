@@ -25,6 +25,7 @@ namespace PlugBoy.UI
         public virtual void UpdateScreenStatus(bool open)
         {
             m_Animator.SetBool("Open", open);
+
             m_CanvasGroup.interactable = open;
             m_CanvasGroup.blocksRaycasts = open;
             IsOpen = open;
