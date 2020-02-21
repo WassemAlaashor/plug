@@ -27,11 +27,8 @@ namespace PlugBoy.Characters
         protected float m_JumpStrength = 10f;
         [SerializeField]
         protected float m_DischargeRate = 5f;
-  
         [SerializeField]
-        protected string[] m_Actions = new string[0];
-        [SerializeField]
-        protected int m_CurrentActionIndex = 0;
+        protected float m_FallLimitY;
 
         [Header("Character Reference")]
         [Space]
@@ -130,30 +127,6 @@ namespace PlugBoy.Characters
             get
             {
                 return m_Speed;
-            }
-        }
-
-        public override string[] Actions
-        {
-            get
-            {
-                return m_Actions;
-            }
-        }
-
-        public override string CurrentAction
-        {
-            get
-            {
-                return m_Actions[m_CurrentActionIndex];
-            }
-        }
-
-        public override int CurrentActionIndex
-        {
-            get
-            {
-                return m_CurrentActionIndex;
             }
         }
 
@@ -386,7 +359,7 @@ namespace PlugBoy.Characters
 
         protected void DeathCheck()
         {
-            if (transform.position.y < -2f || CurrentEnergy.Value < 1)
+            if (transform.position.y < m_FallLimitY || CurrentEnergy.Value < 1)
             {
                 Die();
             }
@@ -427,7 +400,7 @@ namespace PlugBoy.Characters
         {
             if (m_GroundCheck.IsGrounded)
             {
-                // AudioManager.Singleton.PlayFootstepSound ( m_FootstepAudioSource, ref m_CurrentFootstepSoundIndex );
+                AudioManager.Singleton.PlayFootstepSound ( m_FootstepAudioSource, ref m_CurrentFootstepSoundIndex );
             }
         }
 
@@ -484,7 +457,7 @@ namespace PlugBoy.Characters
                     m_Animator.ResetTrigger("Jump");
                     m_Animator.SetTrigger("Jump");
                     m_JumpParticleSystem.Play();
-                    // AudioManager.Singleton.PlayJumpSound ( m_JumpAndGroundedAudioSource );
+                    AudioManager.Singleton.PlayJumpSound ( m_JumpAndGroundedAudioSource );
                 }
             }
         }
@@ -555,7 +528,7 @@ namespace PlugBoy.Characters
             if (!IsDead.Value)
             {
                 m_JumpParticleSystem.Play();
-                // AudioManager.Singleton.PlayGroundedSound ( m_JumpAndGroundedAudioSource );
+                AudioManager.Singleton.PlayGroundedSound ( m_JumpAndGroundedAudioSource );
             }
         }
 

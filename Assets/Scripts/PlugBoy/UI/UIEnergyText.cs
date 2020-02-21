@@ -19,7 +19,8 @@ namespace PlugBoy.UI
 
         protected override void Start()
         {
-            GameManager.Singleton.Player.CurrentEnergy.AddEventAndFire(UpdateEnergyText, this);
+            if (GameManager.Singleton.Player != null && GameManager.Singleton.Player.CurrentEnergy != null) // Editor error
+                GameManager.Singleton.Player.CurrentEnergy.AddEventAndFire(UpdateEnergyText, this);
         }
 
         private void UpdateEnergyText(float newEnergyValue)

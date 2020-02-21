@@ -55,6 +55,12 @@ namespace PlugBoy.Collectables
                 m_UseOnTriggerEnter2D = value;
             }
         }
+        void Start()
+		{
+			// Collectables report to GameManager on how many collectables spawned.
+			// This makes a random amount of collectable possible.
+			GameManager.Singleton.m_MaxCoin.Value += 1;
+		}
 
         public override void OnTriggerEnter2D(Collider2D other)
         {

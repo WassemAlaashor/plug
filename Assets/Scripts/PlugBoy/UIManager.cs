@@ -31,7 +31,6 @@ namespace PlugBoy
         [SerializeField]
         private List<UIScreen> m_Screens;
         private UIScreen m_ActiveScreen;
-        private UIWindow m_ActiveWindow;
         [SerializeField]
         private Texture2D m_CursorDefaultTexture;
         [SerializeField]
@@ -63,15 +62,9 @@ namespace PlugBoy
             Cursor.SetCursor(m_CursorDefaultTexture, Vector2.zero, CursorMode.Auto);
         }
 
-        // void Start()
-        // {
-        //     Init();
-        // }
 
         public void Init()
         {
-            // var loadingScreen = GetUIScreen(UIScreenInfo.LOADING_SCREEN);
-            // OpenScreen(loadingScreen);
             CloseAllScreens();
         }
 
@@ -116,32 +109,8 @@ namespace PlugBoy
             }
         }
 
-        public void OpenWindow(UIWindow window)
-        {
-            window.Open();
-            m_ActiveWindow = window;
-        }
-
-        public void CloseWindow(UIWindow window)
-        {
-            if (m_ActiveWindow == window)
-            {
-                m_ActiveWindow = null;
-            }
-            window.Close();
-        }
-
-        public void CloseActiveWindow()
-        {
-            if (m_ActiveWindow != null)
-            {
-                CloseWindow(m_ActiveWindow);
-            }
-        }
-
         public void OpenScreen(UIScreen screen)
         {
-            print("OPENING SCREEN: " + screen.ScreenInfo);
             CloseAllScreens();
             screen.UpdateScreenStatus(true);
             m_ActiveScreen = screen;

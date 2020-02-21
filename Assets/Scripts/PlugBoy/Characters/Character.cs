@@ -30,12 +30,6 @@ namespace PlugBoy.Characters
 
         public abstract Vector2 Speed { get; }
 
-        public abstract string[] Actions { get; }
-
-        public abstract string CurrentAction { get; }
-
-        public abstract int CurrentActionIndex { get; }
-
         public abstract GroundCheck GroundCheck { get; }
 
         public abstract Rigidbody2D Rigidbody2D { get; }

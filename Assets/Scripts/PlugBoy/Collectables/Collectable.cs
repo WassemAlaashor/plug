@@ -4,13 +4,12 @@ using UnityEngine;
 
 namespace PlugBoy.Collectables
 {
-
 	[RequireComponent (typeof(SpriteRenderer))]
 	[RequireComponent (typeof(Collider2D))]
 	[RequireComponent (typeof(Animator))]
+
 	public abstract class Collectable : MonoBehaviour
 	{
-
 		public const string COLLECT_TRIGGER = "Collect";
 
 		public abstract SpriteRenderer SpriteRenderer { get; }
@@ -25,7 +24,7 @@ namespace PlugBoy.Collectables
 
 		public abstract void OnCollisionEnter2D (Collision2D collision2D);
 
-		public abstract void Collect ();
+		public abstract void Collect();
 
 	}
 

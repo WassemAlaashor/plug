@@ -35,7 +35,7 @@ namespace PlugBoy
         public static event AudioEnabledHandler OnAudioEnabled;
 
         #region Level State
-        public int m_MaxCoin = 0;
+        public Property<int> m_MaxCoin = new Property<int>(0);
         public Property<int> m_Coin = new Property<int>(0);
 
         #endregion

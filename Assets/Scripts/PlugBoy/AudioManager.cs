@@ -35,8 +35,6 @@ namespace PlugBoy
         [SerializeField]
         protected AudioSource m_DieAudioSource;
         [SerializeField]
-        protected AudioSource m_MaceSlamAudioSource;
-        [SerializeField]
         protected AudioSource m_UIAudioSource;
 
         [Header("Music Clips")]
@@ -49,19 +47,15 @@ namespace PlugBoy
         [SerializeField]
         protected AudioClip m_CoinSound;
         [SerializeField]
-        protected AudioClip m_ChestSound;
-        [SerializeField]
         protected AudioClip m_WaterSplashSound;
-        [SerializeField]
-        protected AudioClip m_SpikeSound;
+
         [SerializeField]
         protected AudioClip[] m_GroundedSounds;
         [SerializeField]
         protected AudioClip m_JumpSound;
         [SerializeField]
         protected AudioClip[] m_FootstepSounds;
-        [SerializeField]
-        protected AudioClip m_MaceSlamSound;
+    
         [SerializeField]
         protected AudioClip m_ButtonClickSound;
 
@@ -96,11 +90,6 @@ namespace PlugBoy
             audio.Play();
         }
 
-        public void PlayChestSound(Vector3 position)
-        {
-            PlaySoundOn(m_CoinAudioSource, m_ChestSound);
-        }
-
         public void PlayCoinSound(Vector3 position)
         {
             PlaySoundOn(m_CoinAudioSource, m_CoinSound);
@@ -109,16 +98,6 @@ namespace PlugBoy
         public void PlayWaterSplashSound(Vector3 position)
         {
             PlaySoundOn(m_DieAudioSource, m_WaterSplashSound);
-        }
-
-        public void PlayMaceSlamSound(Vector3 position)
-        {
-            PlaySoundOn(m_MaceSlamAudioSource, m_MaceSlamSound);
-        }
-
-        public void PlaySpikeSound(Vector3 position)
-        {
-            PlaySoundOn(m_DieAudioSource, m_SpikeSound);
         }
 
         public void PlayGroundedSound(AudioSource audio)
@@ -165,11 +144,7 @@ namespace PlugBoy
 
         public AudioClip GetRandomClip(AudioClip[] clips)
         {
-            if (clips.Length > 0)
-            {
-                return clips[Random.Range(0, clips.Length)];
-            }
-            return null;
+            return (clips.Length > 0) ? clips[Random.Range(0, clips.Length)] : null;
         }
 
         #endregion

@@ -10,6 +10,8 @@ namespace PlugBoy.Collectables
     public class Battery : Collectable
     {
         [SerializeField]
+        protected bool m_RemoveAfter = true;
+        [SerializeField]
         protected ParticleSystem m_ParticleSystem;
         [SerializeField]
         protected SpriteRenderer m_SpriteRenderer;
@@ -84,10 +86,13 @@ namespace PlugBoy.Collectables
             GameManager.Singleton.ExternalCharge(50);
             m_Animator.SetTrigger(COLLECT_TRIGGER);
             m_ParticleSystem.Play();
-            m_SpriteRenderer.enabled = false;
+            if (m_RemoveAfter)
+            {
+                m_SpriteRenderer.enabled = false;
+                Destroy(gameObject, m_ParticleSystem.main.duration);
+            }
             m_Collider2D.enabled = false;
-            Destroy(gameObject, m_ParticleSystem.main.duration);
-            // AudioManager.Singleton.PlayCoinSound (transform.position);
+            // AudioManager.Singleton.PlayCoinSound(transform.position);
         }
     }
 }

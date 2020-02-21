@@ -21,6 +21,8 @@ namespace PlugBoy.Collectables
         [SerializeField]
         protected bool m_UseOnTriggerEnter2D = true;
 
+        protected bool m_Opened = false;
+    
         public override SpriteRenderer SpriteRenderer
         {
             get
@@ -76,17 +78,43 @@ namespace PlugBoy.Collectables
             }
         }
 
+        IEnumerator WaitForAnim()
+        {
+            yield return new WaitForSecondsRealtime(1.2f);
+        }
+
+        protected bool LevelCanEnd() => GameManager.Singleton.m_Coin.Value >= GameManager.Singleton.m_MaxCoin.Value;
+
+        public void Open()
+        {
+            if (!m_Opened && LevelCanEnd())
+            {
+                m_Animator.SetTrigger(COLLECT_TRIGGER);
+                m_Opened = true;
+                StartCoroutine(WaitForAnim());
+            }
+        }
+
         public override void Collect()
         {
-            // GameManager.Singleton.
-            // LevelManager.Singleton.LoadLevel();
-            // m_Animator.SetTrigger (COLLECT_TRIGGER);
-            // m_ParticleSystem.Play ();
-            m_SpriteRenderer.enabled = false;
-            m_Collider2D.enabled = false;
-            GameManager.Singleton.EndLevel();
-            // Destroy(gameObject, m_ParticleSystem.main.duration);
-            // AudioManager.Singleton.PlayCoinSound (transform.position);
+            // Check if all collectables were collected
+            if (LevelCanEnd())
+            {
+                print("CURRENT " + GameManager.Singleton.m_Coin.Value);
+                print("MAX " + GameManager.Singleton.m_MaxCoin.Value);
+                // AudioManager.Singleton.PlayCoinSound (transform.position);
+                //m_ParticleSystem.Play();
+                // m_SpriteRenderer.enabled = false;
+                m_Collider2D.enabled = false;
+                GameManager.Singleton.EndLevel();
+                // Destroy(gameObject, m_ParticleSystem.main.duration);
+            }
+            else
+            {
+                // TODO: SHOW MESSAGE
+                print("NOT READY YET!");
+            }
+
         }
     }
 
