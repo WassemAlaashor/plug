@@ -12,6 +12,8 @@ namespace PlugBoy.Collectables
     {
         [SerializeField]
         private Animator m_Animator;
+        [SerializeField]
+        private bool m_CheckLevelEndCondition;
         private BoxCollider2D m_Collider;
 
         void Awake()
@@ -30,8 +32,13 @@ namespace PlugBoy.Collectables
 
         void OnTriggerEnter2D(Collider2D col)
         {
-            m_Animator.SetBool("Enabled", true);
+            if (!m_CheckLevelEndCondition || LevelCanEnd())
+            {
+                m_Animator.SetBool("Enabled", true);
+            }
         }
+
+        private bool LevelCanEnd() => GameManager.Singleton.m_Coin.Value >= GameManager.Singleton.m_MaxCoin.Value;
 
     }
 

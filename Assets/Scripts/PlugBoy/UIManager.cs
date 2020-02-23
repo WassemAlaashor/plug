@@ -83,26 +83,24 @@ namespace PlugBoy
             }
 
             // Hide cursor if inactive
-            if (!MouseMoved())
+            // FIXME: Memory safe?
+            if (Input.GetAxis("Mouse X") == 0 && Input.GetAxis("Mouse Y") == 0)
             {
-                // Shares a coroutine to be efficient
                 if (m_HideCursor == null)
                 {
                     m_HideCursor = StartCoroutine(HideCursor());
                 }
-                else
+            }
+            else // Movement
+            {
+                if (m_HideCursor != null)
                 {
-                    if (m_HideCursor != null)
-                    {
-                        StopCoroutine(m_HideCursor);
-                        m_HideCursor = null;
-                        Cursor.visible = true;
-                    }
+                    StopCoroutine(m_HideCursor);
+                    m_HideCursor = null;
+                    Cursor.visible = true;
                 }
             }
         }
-
-        private bool MouseMoved() => Input.GetAxis("Mouse X") == 0 && (Input.GetAxis("Mouse Y") == 0);
 
         private IEnumerator HideCursor()
         {

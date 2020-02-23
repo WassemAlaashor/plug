@@ -155,7 +155,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 132}
+  m_AnchoredPosition: {x: 0, y: 196}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &8613118
@@ -6056,6 +6056,8 @@ MonoBehaviour:
   m_Text: {fileID: 2000041456}
   m_OneShot: 1
   m_Duration: 3
+  m_IfLevelCanEnd: 0
+  m_IfLevelCannotEnd: 0
 --- !u!95 &259868004
 Animator:
   serializedVersion: 3
@@ -6534,6 +6536,8 @@ MonoBehaviour:
   m_Text: {fileID: 8613118}
   m_OneShot: 1
   m_Duration: 4
+  m_IfLevelCanEnd: 0
+  m_IfLevelCannotEnd: 0
 --- !u!95 &346879632
 Animator:
   serializedVersion: 3
@@ -11504,11 +11508,15 @@ MonoBehaviour:
   m_MusicAudioSource: {fileID: 275213607}
   m_SoundAudioSource: {fileID: 1350121385}
   m_CoinAudioSource: {fileID: 2129641864}
+  m_ChargingAudioSource: {fileID: 0}
+  m_DischargingAudioSource: {fileID: 0}
   m_DieAudioSource: {fileID: 1789642840}
   m_UIAudioSource: {fileID: 147915828}
   m_MusicClip: {fileID: 8300000, guid: e87a612ae87ee50418873e288654802f, type: 3}
   m_CoinSound: {fileID: 8300000, guid: 5151f6de3fc24bc43a3c6daf0eb5ae1a, type: 3}
-  m_WaterSplashSound: {fileID: 8300000, guid: da09767322df44d40b6d4f189f8c3c5c, type: 3}
+  m_WaterSplashSound: {fileID: 8300000, guid: 2d84b6d316dc7d542bb9f2a99203e1bb, type: 3}
+  m_ChargeSound: {fileID: 0}
+  m_DischargeSound: {fileID: 0}
   m_GroundedSounds:
   - {fileID: 8300000, guid: 1ed1d265b82575d499a7fa7654937f67, type: 3}
   - {fileID: 8300000, guid: 6a4de97e3c9f2cd4a8400d14e61f15df, type: 3}
@@ -21620,7 +21628,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 101.9}
+  m_AnchoredPosition: {x: 0, y: 186}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &614471341
@@ -27597,6 +27605,8 @@ MonoBehaviour:
   m_Text: {fileID: 614471341}
   m_OneShot: 1
   m_Duration: 3
+  m_IfLevelCanEnd: 0
+  m_IfLevelCannotEnd: 0
 --- !u!95 &1175767920
 Animator:
   serializedVersion: 3
@@ -28031,7 +28041,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 152}
+  m_AnchoredPosition: {x: 0, y: 240}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1217402731
@@ -28108,7 +28118,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 103}
+  m_AnchoredPosition: {x: 0, y: 170.99998}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1227471578
@@ -44329,7 +44339,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 210}
+  m_AnchoredPosition: {x: 0, y: 273.99997}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1746213005
@@ -59035,6 +59045,8 @@ MonoBehaviour:
   m_Text: {fileID: 2073054936}
   m_OneShot: 1
   m_Duration: 3
+  m_IfLevelCanEnd: 0
+  m_IfLevelCannotEnd: 0
 --- !u!95 &1920540245
 Animator:
   serializedVersion: 3
@@ -69221,7 +69233,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 152}
+  m_AnchoredPosition: {x: 0, y: 243.00002}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2005222553
@@ -69437,6 +69449,8 @@ MonoBehaviour:
   m_Text: {fileID: 1227471578}
   m_OneShot: 1
   m_Duration: 3
+  m_IfLevelCanEnd: 0
+  m_IfLevelCannotEnd: 0
 --- !u!95 &2090028276
 Animator:
   serializedVersion: 3
@@ -81528,6 +81542,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2c032c986e677c41a67a701d66296b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_InstantChargePercent: 50
   m_RemoveAfter: 1
   m_ParticleSystem: {fileID: 5384035462713403707}
   m_SpriteRenderer: {fileID: 5384035462093724285}

@@ -5874,6 +5874,8 @@ MonoBehaviour:
   m_Text: {fileID: 2000041456}
   m_OneShot: 1
   m_Duration: 3
+  m_IfLevelCanEnd: 0
+  m_IfLevelCannotEnd: 0
 --- !u!95 &259868004
 Animator:
   serializedVersion: 3
@@ -6356,6 +6358,8 @@ MonoBehaviour:
   m_Text: {fileID: 8613118}
   m_OneShot: 1
   m_Duration: 4
+  m_IfLevelCanEnd: 0
+  m_IfLevelCannotEnd: 0
 --- !u!95 &346879632
 Animator:
   serializedVersion: 3
@@ -11285,7 +11289,7 @@ MonoBehaviour:
   m_UIAudioSource: {fileID: 147915828}
   m_MusicClip: {fileID: 8300000, guid: a927043c2f4770e459e424d1cded77bf, type: 3}
   m_CoinSound: {fileID: 8300000, guid: 0462ed294ce5cd4499b507833bd23cf4, type: 3}
-  m_WaterSplashSound: {fileID: 8300000, guid: da09767322df44d40b6d4f189f8c3c5c, type: 3}
+  m_WaterSplashSound: {fileID: 8300000, guid: 2d84b6d316dc7d542bb9f2a99203e1bb, type: 3}
   m_ChargeSound: {fileID: 0}
   m_DischargeSound: {fileID: 0}
   m_GroundedSounds:
@@ -21636,6 +21640,8 @@ MonoBehaviour:
   m_Text: {fileID: 345339606}
   m_OneShot: 1
   m_Duration: 4
+  m_IfLevelCanEnd: 0
+  m_IfLevelCannotEnd: 0
 --- !u!95 &645956741
 Animator:
   serializedVersion: 3
@@ -22237,7 +22243,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 164}
+  m_AnchoredPosition: {x: 0, y: 193}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &861264235
@@ -27929,6 +27935,8 @@ MonoBehaviour:
   m_Text: {fileID: 1792006852}
   m_OneShot: 1
   m_Duration: 3
+  m_IfLevelCanEnd: 0
+  m_IfLevelCannotEnd: 0
 --- !u!95 &1065246159
 Animator:
   serializedVersion: 3
@@ -28183,7 +28191,9 @@ MonoBehaviour:
   m_Title: {fileID: 2005222553}
   m_Text: {fileID: 614471341}
   m_OneShot: 1
-  m_Duration: 3
+  m_Duration: 4
+  m_IfLevelCanEnd: 0
+  m_IfLevelCannotEnd: 0
 --- !u!95 &1175767920
 Animator:
   serializedVersion: 3
@@ -39008,7 +39018,9 @@ MonoBehaviour:
   m_Title: {fileID: 861264235}
   m_Text: {fileID: 2073164558}
   m_OneShot: 1
-  m_Duration: 3
+  m_Duration: 4
+  m_IfLevelCanEnd: 0
+  m_IfLevelCannotEnd: 0
 --- !u!95 &1517779728
 Animator:
   serializedVersion: 3
@@ -59970,6 +59982,8 @@ MonoBehaviour:
   m_Text: {fileID: 2073054936}
   m_OneShot: 1
   m_Duration: 4
+  m_IfLevelCanEnd: 0
+  m_IfLevelCannotEnd: 0
 --- !u!95 &1920540245
 Animator:
   serializedVersion: 3
@@ -70186,6 +70200,8 @@ MonoBehaviour:
   m_Text: {fileID: 1560468678}
   m_OneShot: 1
   m_Duration: 4
+  m_IfLevelCanEnd: 0
+  m_IfLevelCannotEnd: 0
 --- !u!95 &2045656037
 Animator:
   serializedVersion: 3
@@ -70396,7 +70412,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 103}
+  m_AnchoredPosition: {x: 0, y: 132.00002}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2073164558
@@ -70499,6 +70515,8 @@ MonoBehaviour:
   m_Text: {fileID: 1227471578}
   m_OneShot: 1
   m_Duration: 3
+  m_IfLevelCanEnd: 0
+  m_IfLevelCannotEnd: 0
 --- !u!95 &2090028276
 Animator:
   serializedVersion: 3

@@ -62,7 +62,6 @@ namespace PlugBoy.Collectables
         public override void OnTriggerEnter2D(Collider2D other)
         {
             string tag = other.tag;
-            print(tag);
             if (m_UseOnTriggerEnter2D && tag == "Player")
             {
                 Collect();

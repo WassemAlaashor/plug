@@ -10,6 +10,8 @@ namespace PlugBoy.Collectables
     public class Battery : Collectable
     {
         [SerializeField]
+        protected int m_InstantChargePercent = 50;
+        [SerializeField]
         protected bool m_RemoveAfter = true;
         [SerializeField]
         protected ParticleSystem m_ParticleSystem;
@@ -83,7 +85,7 @@ namespace PlugBoy.Collectables
         public override void Collect()
         {
             // GameManager.Singleton.m_Coin.Value++;
-            GameManager.Singleton.ExternalCharge(50);
+            GameManager.Singleton.ExternalCharge(m_InstantChargePercent);
             m_Animator.SetTrigger(COLLECT_TRIGGER);
             m_ParticleSystem.Play();
             if (m_RemoveAfter)
