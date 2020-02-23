@@ -100,8 +100,6 @@ namespace PlugBoy.Collectables
             // Check if all collectables were collected
             if (LevelCanEnd())
             {
-                print("CURRENT " + GameManager.Singleton.m_Coin.Value);
-                print("MAX " + GameManager.Singleton.m_MaxCoin.Value);
                 // AudioManager.Singleton.PlayCoinSound (transform.position);
                 //m_ParticleSystem.Play();
                 // m_SpriteRenderer.enabled = false;

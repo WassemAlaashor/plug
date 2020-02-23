@@ -34,7 +34,7 @@ namespace PlugBoy
             m_Singleton = this;
         }
 
-        IEnumerator LoadLevel(int levelIndex)
+        IEnumerator _LoadLevel(int levelIndex)
         {
             // Start transition
             m_Transition.SetTrigger("Start");
@@ -48,18 +48,45 @@ namespace PlugBoy
         //     LoadLevel(SceneManager.GetActiveScene().buildIndex);
         // }
 
+        public void LoadLevel(int levelIndex)
+        {
+            // Only level selector uses this function, so it's bounds-safe
+            StartCoroutine(_LoadLevel(levelIndex));
+        }
+
 
         public void LoadNextLevel()
         {
-            if (SceneManager.GetActiveScene().buildIndex + 1 < SceneManager.sceneCountInBuildSettings)
+            if (SceneManager.GetActiveScene().buildIndex + 1 < SceneManager.sceneCountInBuildSettings - 2)
             {
-                StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex + 1));
+                StartCoroutine(_LoadLevel(SceneManager.GetActiveScene().buildIndex + 1));
+            }
+            else
+            {
+                // Send to main menu
+                LoadMainMenu();
             }
         }
 
         public void ResetLevel()
         {
-            StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex));
+            StartCoroutine(_LoadLevel(SceneManager.GetActiveScene().buildIndex));
+        }
+
+        public void LoadMainMenu()
+        {
+            StartCoroutine(_LoadLevel(0));
+        }
+
+        public void QuitGame()
+        {
+            // Only main menu uses this function
+
+            #if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+            #endif
+
+            Application.Quit();
         }
 
     }

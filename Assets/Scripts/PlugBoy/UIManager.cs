@@ -37,6 +37,7 @@ namespace PlugBoy
         private Texture2D m_CursorClickTexture;
         [SerializeField]
         private float m_CursorHideDelay = 1f;
+        private Coroutine m_HideCursor;
 
         public List<UIScreen> UISCREENS
         {
@@ -70,35 +71,8 @@ namespace PlugBoy
 
         void Update()
         {
-            // if (Input.GetButtonDown("Cancel"))
-            // {
-            //     var pauseScreen = GetUIScreen(UIScreenInfo.PAUSE_SCREEN);
-            //     var ingameScreen = GetUIScreen(UIScreenInfo.IN_GAME_SCREEN);
 
-            //     // If the pause screen is not open, open it otherwise close it
-            //     if (!pauseScreen.IsOpen)
-            //     {
-            //         if(m_ActiveScreen == ingameScreen)
-            //         {
-            //             if (IsAsScreenOpen())
-            //                 CloseAllScreens();
-
-            //             OpenScreen(pauseScreen);
-            //             GameManager.Singleton.PauseGame();
-            //         }
-            //     }
-            //     else 
-            //     {
-            //         if (m_ActiveScreen == pauseScreen)
-            //         {
-            //             CloseScreen(pauseScreen);
-            //             OpenScreen(ingameScreen);
-            //             // We are sure that we want to resume the game when we close a screen
-            //             GameManager.Singleton.ResumeGame();
-            //         }
-            //     }
-            // }
-
+            // Cursor texture
             if (Input.GetMouseButtonDown(0))
             {
                 Cursor.SetCursor(m_CursorClickTexture, Vector2.zero, CursorMode.Auto);
@@ -107,6 +81,33 @@ namespace PlugBoy
             {
                 Cursor.SetCursor(m_CursorDefaultTexture, Vector2.zero, CursorMode.Auto);
             }
+
+            // Hide cursor if inactive
+            if (!MouseMoved())
+            {
+                // Shares a coroutine to be efficient
+                if (m_HideCursor == null)
+                {
+                    m_HideCursor = StartCoroutine(HideCursor());
+                }
+                else
+                {
+                    if (m_HideCursor != null)
+                    {
+                        StopCoroutine(m_HideCursor);
+                        m_HideCursor = null;
+                        Cursor.visible = true;
+                    }
+                }
+            }
+        }
+
+        private bool MouseMoved() => Input.GetAxis("Mouse X") == 0 && (Input.GetAxis("Mouse Y") == 0);
+
+        private IEnumerator HideCursor()
+        {
+            yield return new WaitForSecondsRealtime(m_CursorHideDelay);
+            Cursor.visible = false;
         }
 
         public void OpenScreen(UIScreen screen)

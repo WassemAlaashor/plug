@@ -71,8 +71,15 @@ namespace PlugBoy.Characters
             transform.position = collidedOutlet.transform.position;
             transform.rotation = Quaternion.identity;
             m_RigidBody.constraints = RigidbodyConstraints2D.FreezeAll;
+            // FIXME
+            var isNonStandardOutlet = collidedOutlet.transform.parent.Find("NO_SPRITE_WHEN_CONNECTED");
+            if (isNonStandardOutlet == null)
+            {
+                // A last minute addition, bad solution
+                // Needed for when the outlets are non-standard like in level 3
+                m_SpriteConnected.enabled = true;
+            }
             m_SpriteDisconnected.enabled = false;
-            m_SpriteConnected.enabled = true;
             m_PlugEndPoint.localPosition = Vector3.zero;
             m_Connected = true;
             m_ConnectedOutlet = collidedOutlet.transform.parent.GetComponent<Outlet>();

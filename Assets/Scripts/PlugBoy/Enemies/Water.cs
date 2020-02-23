@@ -22,8 +22,9 @@ namespace PlugBoy.Enemies
 		void OnTriggerEnter2D (Collider2D other)
 		{
 			Character character = other.GetComponent<Character> ();
-			if (character != null) {
-				Kill (character);
+			if (character != null)
+			{
+				Kill(character);
 			}
 		}
 
@@ -32,9 +33,10 @@ namespace PlugBoy.Enemies
 			target.Die ();
 			Vector3 spawnPosition = target.transform.position;
 			spawnPosition.y += -1f;
-			ParticleSystem particle = Instantiate<ParticleSystem> (target.WaterParticleSystem, spawnPosition, Quaternion.identity);
-			Destroy (particle.gameObject, particle.main.duration);
-			// AudioManager.Singleton.PlayWaterSplashSound (transform.position);
+			// FIXME: Won't work
+			// ParticleSystem particle = Instantiate<ParticleSystem>(target.WaterParticleSystem, spawnPosition, Quaternion.identity);
+			// Destroy(particle.gameObject, particle.main.duration);
+			AudioManager.Singleton.PlayWaterSplashSound(transform.position);
 		}
 
 	}

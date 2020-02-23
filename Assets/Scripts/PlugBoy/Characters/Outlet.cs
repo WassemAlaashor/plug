@@ -13,6 +13,14 @@ public class Outlet : MonoBehaviour
     protected float m_ChargeRate = 0; // Discharge if discharger
     [SerializeField]
     protected ParticleSystem m_ParticleSystem;
+    [SerializeField]
+    protected SpriteRenderer m_OutletPoleSpriteRenderer;
+    [SerializeField]
+    protected Sprite m_AlternativeSprite;
+    protected bool m_AlternativeSpriteActive;
+    [SerializeField]
+    protected Sprite m_DefaultSprite;
+    protected bool m_NonStandardOutlet;
     protected bool m_ForceActive = false;
     protected bool m_PlugConnected = false;
     protected PointEffector2D m_PointEffector;
@@ -74,6 +82,7 @@ public class Outlet : MonoBehaviour
         {
             m_ParticleSystem.Stop();
         }
+        m_NonStandardOutlet = transform.Find("NO_SPRITE_WHEN_CONNECTED") != null;
         m_PointEffector = GetComponent<PointEffector2D>();
         m_ConnectTrigger = m_OutletTrigger.GetComponent<CircleCollider2D>();
         // Finding force collider (which is the outer collider)
@@ -90,11 +99,32 @@ public class Outlet : MonoBehaviour
         m_ConnectTrigger.enabled = m_ForceActive;
     }
 
+    void SwapToAlternativeSprite(bool shouldSwap)
+    {
+        if (m_AlternativeSprite == null) { return; }
+        if (m_AlternativeSpriteActive == shouldSwap) { return; }
+        m_OutletPoleSpriteRenderer.sprite = shouldSwap ? m_AlternativeSprite : m_DefaultSprite;
+        m_AlternativeSpriteActive = shouldSwap;
+    }
+
     void Update()
     {
         m_ForceCollider.enabled = m_ForceActive;
         m_PointEffector.enabled = m_ForceActive;
         m_ConnectTrigger.enabled = m_ForceActive;
+
+        // FIXME
+        // Non-standard outlet sprite swap
+        if (m_PlugConnected && m_NonStandardOutlet)
+        {
+            // Swap to alternative
+            SwapToAlternativeSprite(true);
+        }
+        else if (!m_PlugConnected && m_NonStandardOutlet)
+        {
+            // Swap back to default
+            SwapToAlternativeSprite(false);
+        }
     }
 
 }

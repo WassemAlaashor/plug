@@ -23,6 +23,18 @@ namespace PlugBoy.UI
         protected string m_TutorialTitle;
         protected string m_TutorialText;
 
+        void Awake()
+        {
+            StartCoroutine(_StartupDelay()); // TODO: Check.
+        }
+
+        IEnumerator _StartupDelay()
+        {
+            enabled = false;
+            yield return new WaitForSecondsRealtime(0.2f);
+            enabled = true;
+        }
+
         IEnumerator _Show()
         {
             m_Animator.SetBool("Opened", true);
