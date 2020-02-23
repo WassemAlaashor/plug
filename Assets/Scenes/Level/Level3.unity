@@ -114233,7 +114233,7 @@ MonoBehaviour:
   m_DieAudioSource: {fileID: 8954399848983900652}
   m_UIAudioSource: {fileID: 8954399848405532032}
   m_MusicClip: {fileID: 8300000, guid: d137de6d9a4b3a64a8bd65030179dd2f, type: 3}
-  m_CoinSound: {fileID: 8300000, guid: 0462ed294ce5cd4499b507833bd23cf4, type: 3}
+  m_CoinSound: {fileID: 8300000, guid: f5fae1a445820ce43b26b10ce067c278, type: 3}
   m_WaterSplashSound: {fileID: 8300000, guid: da09767322df44d40b6d4f189f8c3c5c, type: 3}
   m_ChargeSound: {fileID: 0}
   m_DischargeSound: {fileID: 0}
@@ -114431,8 +114431,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_audioClip: {fileID: 8300000, guid: f5fae1a445820ce43b26b10ce067c278, type: 3}
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -114941,7 +114941,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: f76240fbc039ddf429636cc448ca1562, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.9
+  m_Volume: 0.7
   m_Pitch: 1
   Loop: 1
   Mute: 0
