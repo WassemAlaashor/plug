@@ -57,7 +57,7 @@ namespace PlugBoy
 
         public void LoadNextLevel()
         {
-            if (SceneManager.GetActiveScene().buildIndex + 1 < SceneManager.sceneCountInBuildSettings - 2)
+            if (SceneManager.GetActiveScene().buildIndex + 1 < SceneManager.sceneCountInBuildSettings - 1)
             {
                 StartCoroutine(_LoadLevel(SceneManager.GetActiveScene().buildIndex + 1));
             }
