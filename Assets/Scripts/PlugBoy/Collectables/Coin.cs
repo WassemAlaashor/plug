@@ -56,11 +56,11 @@ namespace PlugBoy.Collectables
             }
         }
         void Start()
-		{
-			// Collectables report to GameManager on how many collectables spawned.
-			// This makes a random amount of collectable possible.
-			GameManager.Singleton.m_MaxCoin.Value += 1;
-		}
+        {
+            // Collectables report to GameManager on how many collectables spawned.
+            // This makes a random amount of collectable possible.
+            GameManager.Singleton.m_MaxCoin.Value += 1;
+        }
 
         public override void OnTriggerEnter2D(Collider2D other)
         {
@@ -86,7 +86,7 @@ namespace PlugBoy.Collectables
             m_SpriteRenderer.enabled = false;
             m_Collider2D.enabled = false;
             Destroy(gameObject, m_ParticleSystem.main.duration);
-            // AudioManager.Singleton.PlayCoinSound (transform.position);
+            AudioManager.Singleton.PlayCoinSound(transform.position);
         }
     }
 }

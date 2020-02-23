@@ -33,6 +33,10 @@ namespace PlugBoy
         [SerializeField]
         protected AudioSource m_CoinAudioSource;
         [SerializeField]
+        protected AudioSource m_ChargingAudioSource;
+        [SerializeField]
+        protected AudioSource m_DischargingAudioSource;
+        [SerializeField]
         protected AudioSource m_DieAudioSource;
         [SerializeField]
         protected AudioSource m_UIAudioSource;
@@ -48,6 +52,10 @@ namespace PlugBoy
         protected AudioClip m_CoinSound;
         [SerializeField]
         protected AudioClip m_WaterSplashSound;
+        [SerializeField]
+        protected AudioClip m_ChargeSound;
+        [SerializeField]
+        protected AudioClip m_DischargeSound;
 
         [SerializeField]
         protected AudioClip[] m_GroundedSounds;
@@ -79,15 +87,36 @@ namespace PlugBoy
             m_MusicAudioSource.Play();
         }
 
-        public void PlaySoundAt(AudioClip clip, Vector3 position, float volume)
-        {
-            AudioSource.PlayClipAtPoint(clip, position, volume);
-        }
+        // TODO: Positional sound
+        // public void PlaySoundAt(AudioClip clip, Vector3 position, float volume)
+        // {
+        //     AudioSource.PlayClipAtPoint(clip, position, volume);
+        // }
 
         public void PlaySoundOn(AudioSource audio, AudioClip clip)
         {
             audio.clip = clip;
             audio.Play();
+        }
+
+        public void StartChargingSound(Vector3 position)
+        {
+            m_ChargingAudioSource.Play();
+        }
+
+        public void StopDischargingSound()
+        {
+            m_DischargingAudioSource.Stop();
+        }
+
+        public void StartDischargingSound(Vector3 position)
+        {
+            m_DischargingAudioSource.Play();
+        }
+
+        public void StopChargingSound()
+        {
+            m_ChargingAudioSource.Stop();
         }
 
         public void PlayCoinSound(Vector3 position)

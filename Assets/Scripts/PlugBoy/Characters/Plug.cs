@@ -88,7 +88,7 @@ namespace PlugBoy.Characters
             // If the outlet moves in any way, the plug has to move with it
             // Easily producable with a moving platform and an outlet as a child
             transform.parent = m_ConnectedOutlet.transform;
-            
+        
             // OnPlugConnected(); // Fire event
         }
 
@@ -102,6 +102,10 @@ namespace PlugBoy.Characters
             m_ConnectedOutlet.PlugConnected = false;
 
             transform.parent = m_DefaultParentTransform;
+
+            // Deactivate sound
+            AudioManager.Singleton.StopChargingSound();
+            AudioManager.Singleton.StopDischargingSound();
             // OnPlugDisconnected(); // Fire event
         }
 

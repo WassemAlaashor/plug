@@ -11506,7 +11506,7 @@ MonoBehaviour:
   m_CoinAudioSource: {fileID: 2129641864}
   m_DieAudioSource: {fileID: 1789642840}
   m_UIAudioSource: {fileID: 147915828}
-  m_MusicClip: {fileID: 0}
+  m_MusicClip: {fileID: 8300000, guid: e87a612ae87ee50418873e288654802f, type: 3}
   m_CoinSound: {fileID: 8300000, guid: 5151f6de3fc24bc43a3c6daf0eb5ae1a, type: 3}
   m_WaterSplashSound: {fileID: 8300000, guid: da09767322df44d40b6d4f189f8c3c5c, type: 3}
   m_GroundedSounds:
@@ -70994,6 +70994,7 @@ MonoBehaviour:
   m_JumpStrength: 12
   m_DischargeRate: 1
   m_FallLimitY: 2
+  m_CelebrationMode: 0
   m_Rigidbody2D: {fileID: 50120193177069407}
   m_Collider2D: {fileID: 70389374940695797}
   m_Animator: {fileID: 95029887354318243}

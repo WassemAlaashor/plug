@@ -29,6 +29,8 @@ namespace PlugBoy.Characters
         protected float m_DischargeRate = 5f;
         [SerializeField]
         protected float m_FallLimitY;
+        [SerializeField]
+        protected bool m_CelebrationMode = false;
 
         [Header("Character Reference")]
         [Space]
@@ -216,6 +218,10 @@ namespace PlugBoy.Characters
 
         void Awake()
         {
+            if (m_CelebrationMode)
+            {
+                m_DischargeRate = 0;
+            }
             m_InitialPosition = transform.position;
             m_PreviousPositionX = m_InitialPosition.x;
             m_InitialScale = transform.localScale;
@@ -326,7 +332,7 @@ namespace PlugBoy.Characters
             m_PreviousPositionX = transform.position.x;
             // Light intensity
             float intensity = CurrentEnergy.Value / 100;
-            m_LampLight.color = new Color(1, 1, 1, intensity * 170/255);
+            m_LampLight.color = new Color(1, 1, 1, intensity * 170 / 255);
             m_LampLight.transform.localScale = new Vector2(intensity * 3, intensity * 3);
             // Color change
             // Shader.SetGlobalVector ?
@@ -342,11 +348,22 @@ namespace PlugBoy.Characters
 
             if (Input.GetButtonDown("Sprint"))
             {
-                m_CurrentRunSpeed *= m_SprintMultiplier;
+                // Don't sprint in celebration mode, just roll
+                if (m_CelebrationMode)
+                {
+                    m_Animator.ResetTrigger("Roll");
+                    m_Animator.SetTrigger("Roll");
+                }
+                else
+                {
+                    m_CurrentRunSpeed *= m_SprintMultiplier;
+                }
             }
             if (Input.GetButtonUp("Sprint"))
             {
-                m_CurrentRunSpeed /= m_SprintMultiplier;
+                // Don't sprint in celebration mode, just roll
+                if (!m_CelebrationMode)
+                    m_CurrentRunSpeed /= m_SprintMultiplier;
             }
 
             Move(Input.GetAxis("Horizontal"));
@@ -400,7 +417,7 @@ namespace PlugBoy.Characters
         {
             if (m_GroundCheck.IsGrounded)
             {
-                AudioManager.Singleton.PlayFootstepSound ( m_FootstepAudioSource, ref m_CurrentFootstepSoundIndex );
+                AudioManager.Singleton.PlayFootstepSound(m_FootstepAudioSource, ref m_CurrentFootstepSoundIndex);
             }
         }
 
@@ -457,7 +474,7 @@ namespace PlugBoy.Characters
                     m_Animator.ResetTrigger("Jump");
                     m_Animator.SetTrigger("Jump");
                     m_JumpParticleSystem.Play();
-                    AudioManager.Singleton.PlayJumpSound ( m_JumpAndGroundedAudioSource );
+                    AudioManager.Singleton.PlayJumpSound(m_JumpAndGroundedAudioSource);
                 }
             }
         }
@@ -528,7 +545,7 @@ namespace PlugBoy.Characters
             if (!IsDead.Value)
             {
                 m_JumpParticleSystem.Play();
-                AudioManager.Singleton.PlayGroundedSound ( m_JumpAndGroundedAudioSource );
+                AudioManager.Singleton.PlayGroundedSound(m_JumpAndGroundedAudioSource);
             }
         }
 
