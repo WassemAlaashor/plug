@@ -41,9 +41,33 @@ namespace PlugBoy.UI
 
         IEnumerator _Show()
         {
+            yield return StartCoroutine(_CloseAllDialogs());
             m_Animator.SetBool("Opened", true);
             yield return new WaitForSecondsRealtime(m_Duration);
             m_Animator.SetBool("Opened", false);
+        }
+
+        IEnumerator _CloseAllDialogs()
+        {
+            // Finds and closes every tutorial dialog
+            // FIXME: A bad solution but it is a last minute bugfix
+            bool closedAtLeastOne = false;
+            float defaultDelay = 0f;
+            foreach (GameObject dialog in GameObject.FindGameObjectsWithTag("TutorialDialog"))
+            {
+                Animator animator = dialog.GetComponent<Animator>();
+                if (animator.GetBool("Opened"))
+                {
+                    animator.SetBool("Opened", false);
+                    closedAtLeastOne = true;
+                    break;
+                }
+            }
+            if (closedAtLeastOne)
+            {
+                defaultDelay = 0.5f;
+            }
+            yield return new WaitForSecondsRealtime(defaultDelay); // Wait for fadeout animation
         }
 
         void OnTriggerEnter2D(Collider2D col)
