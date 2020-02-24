@@ -51,11 +51,9 @@ namespace PlugBoy
         [SerializeField]
         protected AudioClip m_CoinSound;
         [SerializeField]
+        protected AudioClip m_BatterySound;
+        [SerializeField]
         protected AudioClip m_WaterSplashSound;
-        [SerializeField]
-        protected AudioClip m_ChargeSound;
-        [SerializeField]
-        protected AudioClip m_DischargeSound;
 
         [SerializeField]
         protected AudioClip[] m_GroundedSounds;
@@ -122,6 +120,11 @@ namespace PlugBoy
         public void PlayCoinSound(Vector3 position)
         {
             PlaySoundOn(m_CoinAudioSource, m_CoinSound);
+        }
+
+        public void PlayBatterySound(Vector3 position)
+        {
+            PlaySoundOn(m_CoinAudioSource, m_BatterySound);
         }
 
         public void PlayWaterSplashSound(Vector3 position)

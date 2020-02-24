@@ -84,7 +84,6 @@ namespace PlugBoy.Collectables
 
         public override void Collect()
         {
-            // GameManager.Singleton.m_Coin.Value++;
             GameManager.Singleton.ExternalCharge(m_InstantChargePercent);
             m_Animator.SetTrigger(COLLECT_TRIGGER);
             m_ParticleSystem.Play();
@@ -94,7 +93,7 @@ namespace PlugBoy.Collectables
                 Destroy(gameObject, m_ParticleSystem.main.duration);
             }
             m_Collider2D.enabled = false;
-            // AudioManager.Singleton.PlayCoinSound(transform.position);
+            AudioManager.Singleton.PlayBatterySound(transform.position);
         }
     }
 }

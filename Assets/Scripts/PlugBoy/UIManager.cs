@@ -38,6 +38,34 @@ namespace PlugBoy
         [SerializeField]
         private float m_CursorHideDelay = 1f;
         private Coroutine m_HideCursor;
+        private Coroutine m_TutorialDialog;
+        
+        private bool m_TutorialDialogTimerActive;
+        private bool m_TutorialDialogActive;
+
+        public bool TutorialDialogTimerActive
+        {
+            get
+            {
+                return m_TutorialDialogTimerActive;
+            }
+            set
+            {
+                m_TutorialDialogTimerActive = value;
+            }
+        }
+
+        public bool TutorialDialogActive
+        {
+            get
+            {
+                return m_TutorialDialogActive;
+            }
+            set
+            {
+                m_TutorialDialogActive = value;
+            }
+        }
 
         public List<UIScreen> UISCREENS
         {

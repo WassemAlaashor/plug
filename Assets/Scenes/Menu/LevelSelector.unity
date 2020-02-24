@@ -842,7 +842,7 @@ Animator:
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 1f53d26d02dbacb4e8d508ae1b069fe7, type: 2}
   m_CullingMode: 0
-  m_UpdateMode: 0
+  m_UpdateMode: 2
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
@@ -1981,7 +1981,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
+          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -2255,11 +2255,15 @@ MonoBehaviour:
   m_MusicAudioSource: {fileID: 8659845840937270345}
   m_SoundAudioSource: {fileID: 8659845842010367687}
   m_CoinAudioSource: {fileID: 8659845842573529318}
+  m_ChargingAudioSource: {fileID: 0}
+  m_DischargingAudioSource: {fileID: 0}
   m_DieAudioSource: {fileID: 8659845842376137014}
   m_UIAudioSource: {fileID: 8659845840791393626}
   m_MusicClip: {fileID: 8300000, guid: f74658f7912b597409bf0c84f587653a, type: 3}
   m_CoinSound: {fileID: 8300000, guid: 5151f6de3fc24bc43a3c6daf0eb5ae1a, type: 3}
   m_WaterSplashSound: {fileID: 8300000, guid: da09767322df44d40b6d4f189f8c3c5c, type: 3}
+  m_ChargeSound: {fileID: 0}
+  m_DischargeSound: {fileID: 0}
   m_GroundedSounds:
   - {fileID: 8300000, guid: 1ed1d265b82575d499a7fa7654937f67, type: 3}
   - {fileID: 8300000, guid: 6a4de97e3c9f2cd4a8400d14e61f15df, type: 3}

@@ -130556,9 +130556,8 @@ MonoBehaviour:
   m_UIAudioSource: {fileID: 8954399848405532032}
   m_MusicClip: {fileID: 8300000, guid: d137de6d9a4b3a64a8bd65030179dd2f, type: 3}
   m_CoinSound: {fileID: 8300000, guid: f5fae1a445820ce43b26b10ce067c278, type: 3}
+  m_BatterySound: {fileID: 8300000, guid: 9ad7cb71bf3266542a1a64a24db60e8c, type: 3}
   m_WaterSplashSound: {fileID: 8300000, guid: 2d84b6d316dc7d542bb9f2a99203e1bb, type: 3}
-  m_ChargeSound: {fileID: 0}
-  m_DischargeSound: {fileID: 0}
   m_GroundedSounds:
   - {fileID: 8300000, guid: 1ed1d265b82575d499a7fa7654937f67, type: 3}
   - {fileID: 8300000, guid: 6a4de97e3c9f2cd4a8400d14e61f15df, type: 3}
