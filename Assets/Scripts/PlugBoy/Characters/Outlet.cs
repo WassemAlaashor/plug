@@ -71,20 +71,22 @@ namespace PlugBoy.Characters
                     // Activate sound
                     AudioManager.Singleton.StartChargingSound(transform.position);
                 }
-                if (m_Discharger && value)
+                if (m_Discharger)
                 {
-                    // Activate sound
-                    AudioManager.Singleton.StartDischargingSound(transform.position);
-                }
-                if (m_ParticleSystem) // FIXME
-                {
-                    if (value)
+                    // Particle
+                    if (m_ParticleSystem) // FIXME
                     {
-                        m_ParticleSystem.Play();
-                    }
-                    else
-                    {
-                        m_ParticleSystem.Stop();
+                        if (value)
+                        {
+                            // Activate sound
+                            AudioManager.Singleton.StartDischargingSound(transform.position);
+                            m_ParticleSystem.Play();
+                            print(value);
+                        }
+                        else
+                        {
+                            m_ParticleSystem.Stop();
+                        }
                     }
                 }
                 m_PlugConnected = value;
